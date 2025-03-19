@@ -51,6 +51,8 @@ header {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  background: linear-gradient(to right, #ffffff, #f9fafc);
+  border-left: 5px solid var(--primary);
 }
 
 .client-name {
@@ -58,6 +60,9 @@ header {
   font-weight: bold;
   margin-bottom: 10px;
   color: var(--primary);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .client-contact {
@@ -82,6 +87,22 @@ header {
   margin-right: 8px;
   margin-bottom: 8px;
   display: inline-block;
+  background-color: #f0f7ff;
+  border: 1px solid #cce5ff;
+  color: var(--primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
 }
 
 .grid {
@@ -96,6 +117,14 @@ header {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  border-top: 4px solid var(--primary);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card-title {
@@ -123,10 +152,18 @@ header {
 
 .negative {
   color: var(--danger);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: rgba(231, 76, 60, 0.15);
 }
 
 .positive {
   color: var(--success);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: rgba(46, 204, 113, 0.15);
 }
 
 .chart-container {
@@ -194,16 +231,27 @@ table th, table td {
 table th {
   background-color: var(--light);
   font-weight: bold;
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+  padding: 14px 15px;
 }
 
 table tr:last-child td {
   border-bottom: none;
 }
 
+table tr:hover td {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
 .news-item {
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .news-item:last-child {
@@ -212,16 +260,26 @@ table tr:last-child td {
   padding-bottom: 0;
 }
 
+.news-item:hover {
+  background-color: #f8f9fa;
+}
+
 .news-title {
   font-weight: 500;
   margin-bottom: 5px;
   display: block;
   color: var(--primary);
   text-decoration: none;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
 }
 
 .news-title:hover {
   text-decoration: underline;
+  color: var(--secondary);
 }
 
 .recommendations-list {
@@ -235,7 +293,7 @@ table tr:last-child td {
 }
 
 .recommendations-list li:before {
-  content: "¥";
+  content: "ï¿½";
   position: absolute;
   left: 0;
   color: var(--secondary);
@@ -279,6 +337,14 @@ table tr:last-child td {
   width: 30%;
   background-color: var(--secondary);
   position: relative;
+  transition: all 0.3s ease;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(to top, var(--secondary), var(--tertiary));
+}
+
+.bar:hover {
+  transform: scaleY(1.05);
+  background: linear-gradient(to top, var(--primary), var(--secondary));
 }
 
 .bar-label {
@@ -321,4 +387,23 @@ table tr:last-child td {
   .col-3, .col-4, .col-6, .col-8, .col-9, .col-12 {
     grid-column: span 1;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }

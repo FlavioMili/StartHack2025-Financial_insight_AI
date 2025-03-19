@@ -3,7 +3,7 @@ async function fetchData() {
   try {
     // In a real application, this would be an API endpoint
     // For this example, we'll use a mock fetch that returns the JSON data
-    const response = await fetch('client-data.json');
+    const response = await fetch('../../assets/client_data.json');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -11,133 +11,18 @@ async function fetchData() {
   } catch (error) {
     console.error('Error fetching data:', error);
     
-    // For demonstration purposes, return the sample data
-    // In a real application, you'd handle the error appropriately
+    // For demonstration purposes, return the sample data from the error
     return {
-      "client": {
-        "fullName": "Isabelle Dubois",
-        "contact": {
-          "phone": "+33-6-12-34-56-78",
-          "email": "isabelle.dubois@example.com",
-          "address": "15 Rue de Rivoli, Paris, France"
-        },
-        "preferences": {
-          "riskTolerance": "Moderate",
-          "goals": ["Retirement (10 years)", "Children's University Funds"],
-          "interests": ["Art History", "Sustainable Investments"],
-          "communication": {
-            "preferredChannel": "Email",
-            "frequency": "Quarterly",
-            "bestTime": "Morning"
-          },
-          "callCharacter": "Analytical and Proactive"
-        }
-      },
-      "portfolio": {
-        "summary": {
-          "totalValue": 850000.00,
-          "ytdReturn": -4.2,
-          "assetAllocation": {
-            "stocks": 60,
-            "bonds": 30,
-            "alternatives": 10
-          }
-        },
-        "holdings": [
-          {
-            "symbol": "ASML.AS",
-            "name": "ASML Holding NV",
-            "shares": 150,
-            "marketValue": 105000.00,
-            "costBasis": 110000.00,
-            "performance": -4.55
-          },
-          {
-            "symbol": "NOVO-B.CO",
-            "name": "Novo Nordisk A/S",
-            "shares": 200,
-            "marketValue": 120000.00,
-            "costBasis": 128000.00,
-            "performance": -6.25
-          },
-          {
-            "symbol": "DBXN.DE",
-            "name": "Xtrackers II EUR Govt Bond 10Y",
-            "shares": 800,
-            "marketValue": 81600.00,
-            "costBasis": 80000.00,
-            "performance": 2.00
-          }
-        ],
-        "performance": {
-          "ytdReturn": -4.2,
-          "historicalData": [
-            {"date": "2023-01-01", "value": 900000.00},
-            {"date": "2023-07-01", "value": 880000.00},
-            {"date": "2024-01-01", "value": 850000.00}
-          ],
-          "drawdown": -5.5
-        },
-        "transactions": [
-          {"date":"2024-02-20", "type":"Sell", "symbol":"NOVO-B.CO", "shares":50},
-          {"date":"2024-01-15", "type":"Dividend", "symbol":"ASML.AS", "amount":1200.00}
-        ]
-      },
-      "marketData": {
-        "indices": {
-          "CAC40": 7500.00,
-          "DAX": 16800.00,
-          "EU10Y": 3.05
-        },
-        "news": [
-          {
-            "title": "Semiconductor Sector Faces Supply Chain Disruptions",
-            "url": "https://example.com/semiconductor-news"
-          },
-          {
-            "title": "Pharmaceutical Sector Under Pressure from Pricing Concerns",
-            "url": "https://example.com/pharma-news"
-          },
-          {
-            "title":"Eurozone inflation stubbornly high, ECB policy under scrutiny",
-            "url":"https://example.com/eurozone-inflation"
-          }
-        ],
-        "economicIndicators": {
-          "inflation": 3.2,
-          "interestRate": 4.0,
-          "gdpGrowth": 1.5
-        }
-      },
-      "callContext": {
-        "performanceSummary": {
-          "portfolioReturn": "-4.2%",
-          "benchmarkReturn": "-2.5%",
-          "keyContributors": [
-            {"symbol": "ASML.AS", "decline": "-4.55%", "reason": "Supply chain issues, market volatility"},
-            {"symbol": "NOVO-B.CO", "decline": "-6.25%", "reason": "Pricing pressures, competition"}
-          ]
-        },
-        "recommendations": {
-          "rebalance": "Consider rebalancing to reduce exposure to ASML.AS and NOVO-B.CO, and potentially increase bond or defensive sector allocation.",
-          "longTermView": "Reiterate the 10-year retirement goal and the importance of staying focused on long-term objectives despite short-term fluctuations.",
-          "mitigationStrategies": [
-            "Explore diversifying into sustainable energy or infrastructure sectors.", 
-            "Review NOVO-B.CO position for long-term growth potential."
-          ],
-          "managerActions":"Portfolio was rebalanced in February, reducing NOVO-B.CO exposure. Further review of the semiconductor sector is required."
-        },
-        "nextSteps": {
-          "followUp": "Schedule a detailed portfolio review in three weeks to discuss potential adjustments and market outlook.",
-          "documentVault": "Provide updated portfolio analysis and market commentary, emphasizing sustainable investment opportunities."
-        }
+      client: {
+        fullName: "Failed to load client data",
+        // Default fallback data
       }
     };
   }
 }
 
 // Function to format currency
-function formatCurrency(value, currency = 'Û') {
+function formatCurrency(value, currency = 'â‚¬') {
   return `${currency}${value.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -161,13 +46,18 @@ function setupClientInfo(data) {
   
   // Basic info
   document.getElementById('client-name').textContent = client.fullName;
-  document.getElementById('client-phone').textContent = client.contact.phone;
-  document.getElementById('client-email').textContent = client.contact.email;
-  document.getElementById('client-address').textContent = client.contact.address;
+  
+  // Handle contact info that might be missing in the JSON
+  const contactInfo = client.contact || {};
+  document.getElementById('client-phone').textContent = contactInfo.phone || '+33 6 XX XX XX XX';
+  document.getElementById('client-email').textContent = contactInfo.email || 'isabelle.dubois@example.com';
+  document.getElementById('client-address').textContent = contactInfo.address || 'Paris, France';
+  
   document.getElementById('risk-tolerance').textContent = client.preferences.riskTolerance;
   
   // Goals
   const goalsContainer = document.getElementById('goals-container');
+  goalsContainer.innerHTML = '';
   client.preferences.goals.forEach(goal => {
     const goalTag = document.createElement('span');
     goalTag.className = 'tag';
@@ -177,6 +67,7 @@ function setupClientInfo(data) {
   
   // Interests
   const interestsContainer = document.getElementById('interests-container');
+  interestsContainer.innerHTML = '';
   client.preferences.interests.forEach(interest => {
     const interestTag = document.createElement('span');
     interestTag.className = 'tag';
@@ -184,11 +75,14 @@ function setupClientInfo(data) {
     interestsContainer.appendChild(interestTag);
   });
   
-  // Communication
-  const commPrefs = `${client.preferences.communication.preferredChannel}, 
-                     ${client.preferences.communication.frequency}, 
-                     ${client.preferences.communication.bestTime}`;
-  document.getElementById('communication-pref').textContent = commPrefs;
+  // Communication - using a placeholder since it might be missing
+  const commPreference = client.preferences.communication ? 
+    `${client.preferences.communication.preferredChannel || 'Email'}, 
+     ${client.preferences.communication.frequency || 'Monthly'}, 
+     ${client.preferences.communication.bestTime || 'Morning'}` :
+    'Email, Monthly, Morning';
+  
+  document.getElementById('communication-pref').textContent = commPreference;
   
   // Call character
   document.getElementById('call-character').textContent = client.preferences.callCharacter;
@@ -413,3 +307,78 @@ function setupTransactions(data) {
 function setupNews(data) {
   const news = data.marketData.news;
   const container = document.getElementById('news-container');
+  container.innerHTML = '';
+  
+  news.forEach(item => {
+    const newsItem = document.createElement('div');
+    newsItem.className = 'news-item';
+    
+    const newsLink = document.createElement('a');
+    newsLink.className = 'news-title';
+    newsLink.href = item.url;
+    newsLink.target = '_blank';
+    newsLink.textContent = item.title;
+    
+    newsItem.appendChild(newsLink);
+    container.appendChild(newsItem);
+  });
+}
+
+// Function to set up key contributors
+function setupContributors(data) {
+  const contributors = data.callContext.performanceSummary.keyContributors;
+  const tableBody = document.querySelector('#contributors-table tbody');
+  tableBody.innerHTML = '';
+  
+  contributors.forEach(contributor => {
+    const row = document.createElement('tr');
+    
+    const symbolCell = document.createElement('td');
+    symbolCell.textContent = contributor.symbol;
+    
+    const performanceCell = document.createElement('td');
+    performanceCell.textContent = contributor.decline;
+    performanceCell.className = 'negative';
+    
+    const reasonCell = document.createElement('td');
+    reasonCell.textContent = contributor.reason;
+    
+    row.appendChild(symbolCell);
+    row.appendChild(performanceCell);
+    row.appendChild(reasonCell);
+    
+    tableBody.appendChild(row);
+  });
+}
+
+// Function to set up recommendations
+function setupRecommendations(data) {
+  const recommendations = data.recommendations;
+  
+  document.getElementById('recommendation-rebalance').textContent = recommendations.rebalance;
+  document.getElementById('recommendation-longterm').textContent = recommendations.longTermView;
+  
+  const strategiesContainer = document.getElementById('mitigation-strategies');
+  strategiesContainer.innerHTML = '';
+  
+  recommendations.mitigationStrategies.forEach(strategy => {
+    const item = document.createElement('li');
+    item.textContent = strategy;
+    strategiesContainer.appendChild(item);
+  });
+  
+  document.getElementById('manager-actions').textContent = recommendations.managerActions;
+}
+
+// Function to set up next steps
+function setupNextSteps() {
+  document.getElementById('next-followup').textContent = 'Schedule quarterly review call in 3 months';
+  document.getElementById('next-documents').textContent = 'Update investment policy statement';
+}
+
+// Function to set current date
+function setupCurrentDate() {
+  const dateElement = document.getElementById('current-date');
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+}

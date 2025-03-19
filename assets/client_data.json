@@ -1,6 +1,7 @@
 {
   "client": {
     "fullName": "Isabelle Dubois",
+    "taxArea": "French",
     "preferences": {
       "riskTolerance": "Moderate",
       "goals": ["Retirement (15 years)", "Children's University Funds"],

@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wealth Management Dashboard</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo">Wealth Management Dashboard</div>
+      <div class="logo"><i class="fas fa-chart-line"></i> Wealth Management Dashboard</div>
       <div class="date" id="current-date"></div>
     </header>
     
@@ -17,20 +18,20 @@
       <div class="client-name" id="client-name"></div>
       <div class="client-contact">
         <div class="contact-item">
-          <span>??</span>
+          <span><i class="fas fa-phone"></i></span>
           <span id="client-phone"></span>
         </div>
         <div class="contact-item">
-          <span>??</span>
+          <span><i class="fas fa-envelope"></i></span>
           <span id="client-email"></span>
         </div>
         <div class="contact-item">
-          <span>??</span>
+          <span><i class="fas fa-map-marker-alt"></i></span>
           <span id="client-address"></span>
         </div>
       </div>
       
-      <div>
+      <div class="client-preferences">
         <div><strong>Risk Tolerance:</strong> <span id="risk-tolerance"></span></div>
         <div><strong>Goals:</strong> 
           <div id="goals-container"></div>
@@ -46,7 +47,7 @@
     <div class="grid">
       <div class="col-4">
         <div class="card">
-          <div class="card-title">Portfolio Summary</div>
+          <div class="card-title"><i class="fas fa-wallet"></i> Portfolio Summary</div>
           <div class="summary-item">
             <span class="label">Total Value</span>
             <span class="value" id="total-value"></span>
@@ -66,7 +67,7 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Asset Allocation</div>
+          <div class="card-title"><i class="fas fa-chart-pie"></i> Asset Allocation</div>
           <div class="chart-container">
             <div id="allocation-chart" class="donut-chart">
               <div class="donut-hole"></div>
@@ -78,14 +79,14 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Market Indices</div>
+          <div class="card-title"><i class="fas fa-globe"></i> Market Indices</div>
           <div id="indices-container">
             <!-- Indices will be added by JavaScript -->
           </div>
         </div>
         
         <div class="card">
-          <div class="card-title">Economic Indicators</div>
+          <div class="card-title"><i class="fas fa-chart-line"></i> Economic Indicators</div>
           <div id="indicators-container">
             <!-- Indicators will be added by JavaScript -->
           </div>
@@ -94,7 +95,7 @@
       
       <div class="col-8">
         <div class="card">
-          <div class="card-title">Holdings</div>
+          <div class="card-title"><i class="fas fa-briefcase"></i> Holdings</div>
           <table id="holdings-table">
             <thead>
               <tr>
@@ -113,7 +114,7 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Performance</div>
+          <div class="card-title"><i class="fas fa-chart-bar"></i> Performance</div>
           <div class="perf-chart" id="performance-chart">
             <!-- Performance chart will be added by JavaScript -->
           </div>
@@ -122,7 +123,7 @@
         <div class="grid">
           <div class="col-6">
             <div class="card">
-              <div class="card-title">Recent Transactions</div>
+              <div class="card-title"><i class="fas fa-exchange-alt"></i> Recent Transactions</div>
               <table id="transactions-table">
                 <thead>
                   <tr>
@@ -141,7 +142,7 @@
           
           <div class="col-6">
             <div class="card">
-              <div class="card-title">Market News</div>
+              <div class="card-title"><i class="fas fa-newspaper"></i> Market News</div>
               <div id="news-container">
                 <!-- News will be added by JavaScript -->
               </div>
@@ -150,7 +151,7 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Key Contributors to Performance</div>
+          <div class="card-title"><i class="fas fa-arrow-trend-down"></i> Key Contributors to Performance</div>
           <table id="contributors-table">
             <thead>
               <tr>
@@ -166,7 +167,7 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Recommendations</div>
+          <div class="card-title"><i class="fas fa-lightbulb"></i> Recommendations</div>
           <p><strong>Rebalance:</strong> <span id="recommendation-rebalance"></span></p>
           <p><strong>Long-Term View:</strong> <span id="recommendation-longterm"></span></p>
           <p><strong>Mitigation Strategies:</strong></p>
@@ -177,7 +178,7 @@
         </div>
         
         <div class="card">
-          <div class="card-title">Next Steps</div>
+          <div class="card-title"><i class="fas fa-tasks"></i> Next Steps</div>
           <p><strong>Follow Up:</strong> <span id="next-followup"></span></p>
           <p><strong>Document Vault:</strong> <span id="next-documents"></span></p>
         </div>
@@ -185,6 +186,8 @@
     </div>
   </div>
   
+  <!-- Important: Include shittyLogic.js before script.js -->
+  <script src="shittyLogic.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
