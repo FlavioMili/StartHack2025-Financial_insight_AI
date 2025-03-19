@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Management Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Wealth Management Dashboard</div>
+      <div class="date" id="current-date"></div>
+    </header>
+    
+    <div class="client-info">
+      <div class="client-name" id="client-name"></div>
+      <div class="client-contact">
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-phone"></span>
+        </div>
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-email"></span>
+        </div>
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-address"></span>
+        </div>
+      </div>
+      
+      <div>
+        <div><strong>Risk Tolerance:</strong> <span id="risk-tolerance"></span></div>
+        <div><strong>Goals:</strong> 
+          <div id="goals-container"></div>
+        </div>
+        <div><strong>Interests:</strong> 
+          <div id="interests-container"></div>
+        </div>
+        <div><strong>Communication:</strong> <span id="communication-pref"></span></div>
+        <div><strong>Call Character:</strong> <span id="call-character"></span></div>
+      </div>
+    </div>
+    
+    <div class="grid">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-title">Portfolio Summary</div>
+          <div class="summary-item">
+            <span class="label">Total Value</span>
+            <span class="value" id="total-value"></span>
+          </div>
+          <div class="summary-item">
+            <span class="label">YTD Return</span>
+            <span class="value" id="ytd-return"></span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Benchmark Return</span>
+            <span class="value" id="benchmark-return"></span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Max Drawdown</span>
+            <span class="value" id="drawdown"></span>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Asset Allocation</div>
+          <div class="chart-container">
+            <div id="allocation-chart" class="donut-chart">
+              <div class="donut-hole"></div>
+            </div>
+            <div class="chart-legend" id="allocation-legend">
+              <!-- Legend items will be added by JavaScript -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Market Indices</div>
+          <div id="indices-container">
+            <!-- Indices will be added by JavaScript -->
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Economic Indicators</div>
+          <div id="indicators-container">
+            <!-- Indicators will be added by JavaScript -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-8">
+        <div class="card">
+          <div class="card-title">Holdings</div>
+          <table id="holdings-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Market Value</th>
+                <th>Cost Basis</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Holdings will be added by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Performance</div>
+          <div class="perf-chart" id="performance-chart">
+            <!-- Performance chart will be added by JavaScript -->
+          </div>
+        </div>
+        
+        <div class="grid">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-title">Recent Transactions</div>
+              <table id="transactions-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Symbol</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Transactions will be added by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="col-6">
+            <div class="card">
+              <div class="card-title">Market News</div>
+              <div id="news-container">
+                <!-- News will be added by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Key Contributors to Performance</div>
+          <table id="contributors-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Performance</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Contributors will be added by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Recommendations</div>
+          <p><strong>Rebalance:</strong> <span id="recommendation-rebalance"></span></p>
+          <p><strong>Long-Term View:</strong> <span id="recommendation-longterm"></span></p>
+          <p><strong>Mitigation Strategies:</strong></p>
+          <ul class="recommendations-list" id="mitigation-strategies">
+            <!-- Mitigation strategies will be added by JavaScript -->
+          </ul>
+          <p><strong>Manager Actions:</strong> <span id="manager-actions"></span></p>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Next Steps</div>
+          <p><strong>Follow Up:</strong> <span id="next-followup"></span></p>
+          <p><strong>Document Vault:</strong> <span id="next-documents"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
