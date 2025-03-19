@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Management Dashboard</title>
+  <style>
+    :root {
+      --primary: #0a3d62;
+      --secondary: #3867d6;
+      --tertiary: #4b7bec;
+      --light: #f5f6fa;
+      --dark: #2f3542;
+      --danger: #e74c3c;
+      --success: #2ecc71;
+      --warning: #f1c40f;
+      --text-dark: #333;
+      --text-light: #f5f6fa;
+      --border: #dcdde1;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f0f2f5;
+      color: var(--text-dark);
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .client-info {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .client-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    
+    .client-contact {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .tag {
+      background-color: var(--light);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 14px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .summary-item .label {
+      font-weight: 500;
+    }
+    
+    .summary-item .value {
+      font-weight: bold;
+    }
+    
+    .negative {
+      color: var(--danger);
+    }
+    
+    .positive {
+      color: var(--success);
+    }
+    
+    .chart-container {
+      width: 100%;
+      height: 250px;
+      position: relative;
+    }
+    
+    .donut-chart {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--secondary) 0% 60%, 
+        var(--tertiary) 60% 90%, 
+        var(--warning) 90% 100%
+      );
+      position: relative;
+      margin: 0 auto;
+    }
+    
+    .donut-hole {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background-color: white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+    }
+    
+    .color-box {
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+    }
+    
+    .stocks { background-color: var(--secondary); }
+    .bonds { background-color: var(--tertiary); }
+    .alternatives { background-color: var(--warning); }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    
+    table th, table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    table th {
+      background-color: var(--light);
+      font-weight: bold;
+    }
+    
+    table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .news-item {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .news-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .news-title {
+      font-weight: 500;
+      margin-bottom: 5px;
+      display: block;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .news-title:hover {
+      text-decoration: underline;
+    }
+    
+    .recommendations-list {
+      list-style-type: none;
+    }
+    
+    .recommendations-list li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .recommendations-list li:before {
+      content: "XXX";
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+    }
+    
+    .col-3 {
+      grid-column: span 3;
+    }
+    
+    .col-4 {
+      grid-column: span 4;
+    }
+    
+    .col-6 {
+      grid-column: span 6;
+    }
+    
+    .col-8 {
+      grid-column: span 8;
+    }
+    
+    .col-9 {
+      grid-column: span 9;
+    }
+    
+    .col-12 {
+      grid-column: span 12;
+    }
+    
+    .perf-chart {
+      width: 100%;
+      height: 200px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 20px;
+    }
+    
+    .bar {
+      width: 30%;
+      background-color: var(--secondary);
+      position: relative;
+    }
+    
+    .bar-label {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+    }
+    
+    .bar-value {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 992px) {
+      .grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      
+      .col-3, .col-4, .col-6 {
+        grid-column: span 6;
+      }
+      
+      .col-8, .col-9, .col-12 {
+        grid-column: span 6;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      
+      .col-3, .col-4, .col-6, .col-8, .col-9, .col-12 {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Wealth Management Dashboard</div>
+      <div class="date" id="current-date"></div>
+    </header>
+    
+    <div class="client-info">
+      <div class="client-name" id="client-name">Isabelle Dubois</div>
+      <div class="client-contact">
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-phone">+33-6-12-34-56-78</span>
+        </div>
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-email">isabelle.dubois@example.com</span>
+        </div>
+        <div class="contact-item">
+          <span>??</span>
+          <span id="client-address">15 Rue de Rivoli, Paris, France</span>
+        </div>
+      </div>
+      
+      <div>
+        <div><strong>Risk Tolerance:</strong> <span id="risk-tolerance">Moderate</span></div>
+        <div><strong>Goals:</strong> 
+          <div id="goals-container">
+            <span class="tag">Retirement (10 years)</span>
+            <span class="tag">Children's University Funds</span>
+          </div>
+        </div>
+        <div><strong>Interests:</strong> 
+          <div id="interests-container">
+            <span class="tag">Art History</span>
+            <span class="tag">Sustainable Investments</span>
+          </div>
+        </div>
+        <div><strong>Communication:</strong> <span id="communication-pref">Email, Quarterly, Morning</span></div>
+        <div><strong>Call Character:</strong> <span id="call-character">Analytical and Proactive</span></div>
+      </div>
+    </div>
+    
+    <div class="grid">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-title">Portfolio Summary</div>
+          <div class="summary-item">
+            <span class="label">Total Value</span>
+            <span class="value" id="total-value">$850,000.00</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">YTD Return</span>
+            <span class="value negative" id="ytd-return">-4.2%</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Benchmark Return</span>
+            <span class="value negative" id="benchmark-return">-2.5%</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Max Drawdown</span>
+            <span class="value negative" id="drawdown">-5.5%</span>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Asset Allocation</div>
+          <div class="chart-container">
+            <div class="donut-chart">
+              <div class="donut-hole"></div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="color-box stocks"></div>
+                <span>Stocks (60%)</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box bonds"></div>
+                <span>Bonds (30%)</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box alternatives"></div>
+                <span>Alt (10%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Market Indices</div>
+          <div class="summary-item">
+            <span class="label">CAC 40</span>
+            <span class="value" id="cac40">7,500.00</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">DAX</span>
+            <span class="value" id="dax">16,800.00</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">EU 10Y</span>
+            <span class="value" id="eu10y">3.05%</span>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Economic Indicators</div>
+          <div class="summary-item">
+            <span class="label">Inflation</span>
+            <span class="value" id="inflation">3.2%</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Interest Rate</span>
+            <span class="value" id="interest-rate">4.0%</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">GDP Growth</span>
+            <span class="value" id="gdp-growth">1.5%</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-8">
+        <div class="card">
+          <div class="card-title">Holdings</div>
+          <table id="holdings-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Market Value</th>
+                <th>Cost Basis</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ASML Holding NV</td>
+                <td>ASML.AS</td>
+                <td>150</td>
+                <td>$105,000.00</td>
+                <td>$110,000.00</td>
+                <td class="negative">-4.55%</td>
+              </tr>
+              <tr>
+                <td>Novo Nordisk A/S</td>
+                <td>NOVO-B.CO</td>
+                <td>200</td>
+                <td>120,000.00</td>
+                <td>128,000.00</td>
+                <td class="negative">-6.25%</td>
+              </tr>
+              <tr>
+                <td>Xtrackers II EUR Govt Bond 10Y</td>
+                <td>DBXN.DE</td>
+                <td>800</td>
+                <td>81,600.00</td>
+                <td>80,000.00</td>
+                <td class="positive">+2.00%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Performance</div>
+          <div class="perf-chart">
+            <div class="bar" style="height: 180px;">
+              <div class="bar-value">¿õ900,000</div>
+              <div class="bar-label">Jan 2023</div>
+            </div>
+            <div class="bar" style="height: 176px;">
+              <div class="bar-value">¿õ880,000</div>
+              <div class="bar-label">Jul 2023</div>
+            </div>
+            <div class="bar" style="height: 170px;">
+              <div class="bar-value">¿õ850,000</div>
+              <div class="bar-label">Jan 2024</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-title">Recent Transactions</div>
+              <table id="transactions-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Symbol</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Feb 20, 2024</td>
+                    <td>Sell</td>
+                    <td>NOVO-B.CO</td>
+                    <td>50 shares</td>
+                  </tr>
+                  <tr>
+                    <td>Jan 15, 2024</td>
+                    <td>Dividend</td>
+                    <td>ASML.AS</td>
+                    <td>¿õ1,200.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="col-6">
+            <div class="card">
+              <div class="card-title">Market News</div>
+              <div class="news-item">
+                <a href="https://example.com/semiconductor-news" class="news-title">Semiconductor Sector Faces Supply Chain Disruptions</a>
+              </div>
+              <div class="news-item">
+                <a href="https://example.com/pharma-news" class="news-title">Pharmaceutical Sector Under Pressure from Pricing Concerns</a>
+              </div>
+              <div class="news-item">
+                <a href="https://example.com/eurozone-inflation" class="news-title">Eurozone inflation stubbornly high, ECB policy under scrutiny</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Key Contributors to Performance</div>
+          <table id="contributors-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Performance</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ASML.AS</td>
+                <td class="negative">-4.55%</td>
+                <td>Supply chain issues, market volatility</td>
+              </tr>
+              <tr>
+                <td>NOVO-B.CO</td>
+                <td class="negative">-6.25%</td>
+                <td>Pricing pressures, competition</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Recommendations</div>
+          <p><strong>Rebalance:</strong> <span id="recommendation-rebalance">Consider rebalancing to reduce exposure to ASML.AS and NOVO-B.CO, and potentially increase bond or defensive sector allocation.</span></p>
+          <p><strong>Long-Term View:</strong> <span id="recommendation-longterm">Reiterate the 10-year retirement goal and the importance of staying focused on long-term objectives despite short-term fluctuations.</span></p>
+          <p><strong>Mitigation Strategies:</strong></p>
+          <ul class="recommendations-list" id="mitigation-strategies">
+            <li>Explore diversifying into sustainable energy or infrastructure sectors.</li>
+            <li>Review NOVO-B.CO position for long-term growth potential.</li>
+          </ul>
+          <p><strong>Manager Actions:</strong> <span id="manager-actions">Portfolio was rebalanced in February, reducing NOVO-B.CO exposure. Further review of the semiconductor sector is required.</span></p>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Next Steps</div>
+          <p><strong>Follow Up:</strong> <span id="next-followup">Schedule a detailed portfolio review in three weeks to discuss potential adjustments and market outlook.</span></p>
+          <p><strong>Document Vault:</strong> <span id="next-documents">Provide updated portfolio analysis and market commentary, emphasizing sustainable investment opportunities.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Set current date
+    const dateElement = document.getElementById('current-date');
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateElement.textContent = new Date().toLocaleDateString('en-US', options);
+    
+    // Functions to parse and display data from JSON
+    function initDashboard(data) {
+      // Client information
+      document.getElementById('client-name').textContent = data.client.fullName;
+      document.getElementById('client-phone').textContent = data.client.contact.phone;
+      document.getElementById('client-email').textContent = data.client.contact.email;
+      document.getElementById('client-address').textContent = data.client.contact.address;
+      document.getElementById('risk-tolerance').textContent = data.client.preferences.riskTolerance;
+      
+      // Communication preferences
+      const commPrefs = `${data.client.preferences.communication.preferredChannel}, 
+                         ${data.client.preferences.communication.frequency}, 
+                         ${data.client.preferences.communication.bestTime}`;
+      document.getElementById('communication-pref').textContent = commPrefs;
+      
+      document.getElementById('call-character').textContent = data.client.preferences.callCharacter;
+      
+      // Portfolio summary
+      document.getElementById('total-value').textContent = `¿õ${data.portfolio.summary.totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('ytd-return').textContent = `${data.portfolio.summary.ytdReturn}%`;
+      document.getElementById('drawdown').textContent = `${data.portfolio.performance.drawdown}%`;
+      
+      // Market indices
+      document.getElementById('cac40').textContent = data.marketData.indices.CAC40.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('dax').textContent = data.marketData.indices.DAX.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('eu10y').textContent = `${data.marketData.indices.EU10Y}%`;
+      
+      // Economic indicators
+      document.getElementById('inflation').textContent = `${data.marketData.economicIndicators.inflation}%`;
+      document.getElementById('interest-rate').textContent = `${data.marketData.economicIndicators.interestRate}%`;
+      document.getElementById('gdp-growth').textContent = `${data.marketData.economicIndicators.gdpGrowth}%`;
+      
+      // Benchmark return
+      document.getElementById('benchmark-return').textContent = data.callContext.performanceSummary.benchmarkReturn;
+      
+      // Recommendations
+      document.getElementById('recommendation-rebalance').textContent = data.callContext.recommendations.rebalance;
+      document.getElementById('recommendation-longterm').textContent = data.callContext.recommendations.longTermView;
+      document.getElementById('manager-actions').textContent = data.callContext.recommendations.managerActions;
+      
+      // Next steps
+      document.getElementById('next-followup').textContent = data.callContext.nextSteps.followUp;
+      document.getElementById('next-documents').textContent = data.callContext.nextSteps.documentVault;
+    }
+    
+    // This would normally be fetched from an API endpoint
+    const jsonData = {
+      "client": {
+        "fullName": "Isabelle Dubois",
+        "contact": {
+          "phone": "+33-6-12-34-56-78",
+          "email": "isabelle.dubois@example.com",
+          "address": "15 Rue de Rivoli, Paris, France"
+        },
+        "preferences": {
+          "riskTolerance": "Moderate",
+          "goals": ["Retirement (10 years)", "Children's University Funds"],
+          "interests": ["Art History", "Sustainable Investments"],
+          "communication": {
+            "preferredChannel": "Email",
+            "frequency": "Quarterly",
+            "bestTime": "Morning"
+          },
+          "callCharacter": "Analytical and Proactive"
+        }
+      },
+      "portfolio": {
+        "summary": {
+          "totalValue": 850000.00,
+          "ytdReturn": -4.2,
+          "assetAllocation": {
+            "stocks": 60,
+            "bonds": 30,
+            "alternatives": 10
+          }
+        },
+        "performance": {
+          "ytdReturn": -4.2,
+          "drawdown": -5.5
+        }
+      },
+      "marketData": {
+        "indices": {
+          "CAC40": 7500.00,
+          "DAX": 16800.00,
+          "EU10Y": 3.05
+        },
+        "economicIndicators": {
+          "inflation": 3.2,
+          "interestRate": 4.0,
+          "gdpGrowth": 1.5
+        }
+      },
+      "callContext": {
+        "performanceSummary": {
+          "portfolioReturn": "-4.2%",
+          "benchmarkReturn": "-2.5%"
+        },
+        "recommendations": {
+          "rebalance": "Consider rebalancing to reduce exposure to ASML.AS and NOVO-B.CO, and potentially increase bond or defensive sector allocation.",
+          "longTermView": "Reiterate the 10-year retirement goal and the importance of staying focused on long-term objectives despite short-term fluctuations.",
+          "managerActions":"Portfolio was rebalanced in February, reducing NOVO-B.CO exposure. Further review of the semiconductor sector is required."
+        },
+        "nextSteps": {
+          "followUp": "Schedule a detailed portfolio review in three weeks to discuss potential adjustments and market outlook.",
+          "documentVault": "Provide updated portfolio analysis and market commentary, emphasizing sustainable investment opportunities."
+        }
+      }
+    };
+    
+    // Initialize dashboard with data
+    initDashboard(jsonData);
+  </script>
+</body>
+</html>
+
