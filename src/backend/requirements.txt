@@ -3,3 +3,4 @@ llama-index-readers-file
 google-genai
 requests
 openai
+wordllama
