@@ -1,0 +1,5 @@
+llama-index-core
+llama-index-readers-file
+google-genai
+requests
+openai
