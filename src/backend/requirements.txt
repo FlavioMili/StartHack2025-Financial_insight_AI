@@ -4,3 +4,4 @@ google-genai
 requests
 openai
 wordllama
+git+https://github.com/FrancescoCaracciolo/Memoripy.git

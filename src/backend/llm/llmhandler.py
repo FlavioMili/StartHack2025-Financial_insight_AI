@@ -1,4 +1,4 @@
-class LLMHanlder():
+class LLMHandler():
     def get_response(self, history, prompts, tools) -> str:
         pass
 

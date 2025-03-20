@@ -3,7 +3,7 @@ from wordllama import WordLlama
 import numpy as np
 
 class WordLlamaHanlder(EmbeddingHandler):
-    def __init__(self, size) -> None:
+    def __init__(self, size=512) -> None:
         self.size = size
         self.wl = WordLlama.load(dim=size)
 

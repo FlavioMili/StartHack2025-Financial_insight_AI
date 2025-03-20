@@ -1,9 +1,9 @@
-from .llmhandler import LLMHanlder
+from .llmhandler import LLMHandler
 from google import genai
 from google.genai.types import HarmCategory, HarmBlockThreshold, GenerateContentConfig
 
 
-class GeminiHandler(LLMHanlder):
+class GeminiHandler(LLMHandler):
 
     def __init__(self, api, model) -> None:
         self.client = genai.Client(api_key=api)
@@ -19,7 +19,7 @@ class GeminiHandler(LLMHanlder):
             HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
         }
         instructions = "\n".join(prompts)
-        generate_content_config = GenerateContentConfig( system_instruction=instructions, safety_settings=safety)
+        generate_content_config = GenerateContentConfig( system_instruction=instructions)
         converted_history = self.convert_history(history)
         response = self.client.models.generate_content_stream(
                 contents=converted_history,
