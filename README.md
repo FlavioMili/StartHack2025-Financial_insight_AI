@@ -52,3 +52,6 @@ python transcribe.py
 ```
 
 
+### LLM usage :
+
+In order to use Gemini, you will need to add you GEMINI_API_KEY in the .env file in the root of the directory. 

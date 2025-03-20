@@ -34,7 +34,9 @@ def chat(id):
     if not prompt:
         return jsonify({"error": "Prompt is required"}), 400
     try:
-        history = TEXT_CHAT_MEM.get(id, []).append({"role": "user", "content": prompt})
+        history = TEXT_CHAT_MEM.get(id, [])
+        history.append({"role": "user", "content": prompt})
+        TEXT_CHAT_MEM[id] = history
         model = ResponsePipeline(id)
         response = model.get_answer(history)
     except Exception as e:
