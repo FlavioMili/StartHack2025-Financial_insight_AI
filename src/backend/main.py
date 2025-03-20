@@ -11,6 +11,7 @@ VOCAL_CHAT_MEM = {0: [{"role": "user", "content": "Why my tesla shares dropped?"
 TEXT_CHAT_MEM = {}
 TEMPORARY_CHAT_MEM = {}
 PIPELINES = {}
+CONTEXT_SIZE = 20
 
 @app.route('/getClientData/<int:id>', methods=['GET'])
 def getClientData(id):
@@ -22,7 +23,13 @@ def getClientData(id):
 @app.route('/query/<int:id>', methods=['GET'])
 def query(id):
     model = ResponsePipeline(id)
-    response = model.get_answer([{"role": "user", "content": VOCAL_CHAT_MEM[id][-1]["content"]}])
+    response = model.get_answer(VOCAL_CHAT_MEM[id][-CONTEXT_SIZE:])
+    pipeline = PIPELINES.get(id, None)
+    if pipeline is None:
+        model = ResponsePipeline(id)
+    else:
+        model = pipeline
+    response = model.get_answer(VOCAL_CHAT_MEM[id][-CONTEXT_SIZE:])
     if not response:
         return jsonify({"error": "No JSON data provided"}), 400
     return jsonify({"received": response}), 200
@@ -67,7 +74,7 @@ def add_interaction(id):
             VOCAL_CHAT_MEM[id] = response
         else:
             VOCAL_CHAT_MEM[id] += response 
-        
+        query(id) 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     return jsonify({}), 200

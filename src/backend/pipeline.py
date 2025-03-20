@@ -3,6 +3,7 @@ from .llm.wordllama import WordLlamaHanlder
 from .rag.memoripy_handler import MemoripyHandler
 from dotenv import load_dotenv 
 import os
+from .tools import tool 
 load_dotenv()
 
 GEMINI_API = os.getenv("GEMINI_API_KEY")
@@ -19,6 +20,8 @@ You are provided with the following:
 Return a query to give to an LLM that returns all the information required. Only write the query, don't provide any other output
 
 """
+PROMPT_CHAT = """You are an helpful assistant"""
+
 class ResponsePipeline():
     def __init__(self, user_id: int, context_size: int=15) -> None:
         self.user_id = user_id
@@ -46,6 +49,13 @@ class ResponsePipeline():
         self.llm.enable_search(False)
         prompt = [PROMPT, "\nPrevious interactions with LLMs" + similar_prompts, "\nExtra context with the user:" + similar_memories + "\nUser Information: " + self.user_info]
         r = self.llm.get_response(history, prompt, [])
-        r2 = self.llm.get_response(history, [r, "\n\nUser Information:\n" + self.user_info], [])
         self.llm.enable_search(True)
+        r2 = self.llm.get_response(history, [r, "\n\nUser Information:\n" + self.user_info], [])
         return r2
+
+    def get_chat_answer(self, history: list) -> str:
+        self.llm.enable_search(True)
+        r = self.llm.get_response(history, [PROMPT_CHAT, self.user_info], [tool.tool_list])
+        self.llm.enable_search(False)
+        return r
+

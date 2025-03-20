@@ -74,7 +74,7 @@ def summary_company(query: str):
     response = requests.post(url)
     return response.json()
 
-tool_list = [GoogleSearchRetrieval, summary_company, ohlcv, company_data_search, retrive_client_info]
+tool_list = [summary_company, ohlcv, company_data_search, retrive_client_info]
 
 if __name__ == "__main__":
     print(summary_company("nestle"))
