@@ -36,15 +36,31 @@
                 </div>
 
                 <div class="card">
-                  <h2>SPAZIO VISTE PORTFOLIO</h2>
-                  <div class="view-buttons">
-                      <button class="view-btn" data-view="testo1">Vista 1</button>
-                      <button class="view-btn" data-view="testo2">Vista 2</button>
+                  <div id="portfolio-selector-container">
+                    <h2>PORTFOLIO</h2>
+                      <button class="view-btn active" data-view="text1">Assets</button>
+                      <button class="view-btn" data-view="text2">Pie Chart</button>
                   </div>
 
                   <div id="viewContainer">
-                      <p id="text1" style="display: none;">Questo è il contenuto della Vista 1.</p>
-                      <p id="text2" style="display: none;">Questo è il contenuto della Vista 2.</p>
+                      <div id="text1" style="display: none;">
+                          <table id="stock-table">
+                              <thead>
+                                  <tr>
+                                      <th>Nome Azione</th>
+                                      <th>Valore</th>
+                                      <th>Blocco Azioni</th>
+                                      <th>% Var.</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- I dati verranno inseriti dinamicamente -->
+                              </tbody>
+                          </table>
+                      </div>
+                      <div id="text2" style="display: none;">
+                        <canvas id="pieChart"></canvas>
+                      </div>
                   </div>
                 </div>
 
@@ -68,5 +84,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="basic_behaviour.js"></script>
     <script src="script.js"></script>
+    <script src="piechart.js"></script>
 </body>
 </html>
