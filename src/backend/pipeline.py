@@ -48,4 +48,4 @@ class ResponsePipeline():
         r = self.llm.get_response(history, prompt, [])
         r2 = self.llm.get_response(history, [r, "\n\nUser Information:\n" + self.user_info], [])
         self.llm.enable_search(True)
-        return r
+        return r2
