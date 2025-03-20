@@ -1,6 +1,6 @@
 from .llmhandler import LLMHandler
 from google import genai
-from google.genai.types import HarmCategory, HarmBlockThreshold, GenerateContentConfig
+from google.genai.types import GoogleSearch, HarmCategory, HarmBlockThreshold, GenerateContentConfig, Tool
 
 
 class GeminiHandler(LLMHandler):
@@ -8,6 +8,10 @@ class GeminiHandler(LLMHandler):
     def __init__(self, api, model) -> None:
         self.client = genai.Client(api_key=api)
         self.model = model
+        self.search = False
+
+    def enable_search(self, value:bool):
+        self.search = value
 
     def get_response(self, history: list[dict], prompts: list[str], tools) -> str:
         return self.get_response_stream(history, prompts, tools, on_update=lambda x: None)
@@ -19,7 +23,10 @@ class GeminiHandler(LLMHandler):
             HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
         }
         instructions = "\n".join(prompts)
-        generate_content_config = GenerateContentConfig( system_instruction=instructions)
+        tools = []
+        if self.search:
+            tools += [Tool(google_search=GoogleSearch)]
+        generate_content_config = GenerateContentConfig( system_instruction=instructions, tools=tools)
         converted_history = self.convert_history(history)
         response = self.client.models.generate_content_stream(
                 contents=converted_history,

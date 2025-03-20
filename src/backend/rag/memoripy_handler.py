@@ -9,6 +9,7 @@ import os
 import numpy as np
 from ..utility.strings import extract_json
 from ..utility.strings import process_conversation
+import json 
 
 class MemoripyHandler(RAGHandler):
     key = "memoripy"
@@ -68,12 +69,14 @@ class MemoripyHandler(RAGHandler):
                     return j
         return ChatModelAdapter(llm)
 
-    def add_interaction(self, prompt, response):
+    def add_interaction(self, prompt, response, metadata={}):
         if self.memory_manager is not None:
             combined_text = " ".join([prompt, response])
             concepts = self.memory_manager.extract_concepts(combined_text)
             print(combined_text)
             new_embedding = self.embedding.get_embedding(combined_text)
+            if len(metadata) > 0:
+                response += "\n\n```json" + json.dumps(metadata) + "```"
             self.memory_manager.add_interaction(prompt, response, new_embedding, concepts)
 
     def retrieve_interactions(self, message):
