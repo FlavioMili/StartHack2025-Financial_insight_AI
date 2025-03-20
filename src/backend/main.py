@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, send_file, request
+from flask_cors import CORS
 from .pipeline import ResponsePipeline
 import os
 from .speech.order_speakers import classify_speaker
 
 app = Flask(__name__)
-ASSETS_FOLDER = "assets"
+CORS(app)
+ASSETS_FOLDER = "../assets"
 
 VOCAL_CHAT_MEM = {0: [{"role": "user", "content": "Why my tesla shares dropped?"}]}
 
@@ -15,7 +17,7 @@ CONTEXT_SIZE = 20
 
 @app.route('/getClientData/<int:id>', methods=['GET'])
 def getClientData(id):
-    file_path = os.path.join('../../assets/', f"client_{id}.json")
+    file_path = os.path.join(ASSETS_FOLDER, f"client_{id}.json")
     if not os.path.exists(file_path):
         return jsonify({"error": "File not found"}), 404
     return send_file(file_path, mimetype='application/json')
