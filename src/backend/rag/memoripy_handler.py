@@ -79,11 +79,14 @@ class MemoripyHandler(RAGHandler):
                 response += "\n\n```json" + json.dumps(metadata) + "```"
             self.memory_manager.add_interaction(prompt, response, new_embedding, concepts)
 
-    def retrieve_interactions(self, message):
+    def retrieve_interactions(self, message, require_metadata=False):
         if self.memory_manager is not None:
             relevant_interactions = self.memory_manager.retrieve_relevant_interactions(message, exclude_last_n=self.memory_size, return_minimum=3)
             r = []
             for i in relevant_interactions:
+               if require_metadata:
+                    if "null" in i["output"] or "N/A" in i["output"]:
+                        continue
                r.append(i["prompt"] + "\n" + i["output"])
             return process_conversation("\n".join(r))
         return ""
