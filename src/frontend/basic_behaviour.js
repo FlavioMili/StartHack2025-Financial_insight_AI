@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Add this function to create content rotation for both analysis and news
+// Fix the content rotation functions
 document.addEventListener("DOMContentLoaded", function() {
     // Define related content items (analysis and news pairs that appear together)
     const contentItems = [
@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
     
     let currentItemIndex = 0;
-    const maxItemsToShow = 3; // Maximum number of analysis items to show before removing old ones
+    const maxItemsToShow = 3; // Maximum number of analysis/news items to show
     
     // Keep track of displayed items
     const displayedAnalysis = [];
@@ -438,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function() {
         keypoint.style.opacity = '0';
         keypoint.style.transition = 'opacity 0.7s ease-in-out';
         keypoint.style.marginBottom = '15px';
-        keypoint.style.backgroundColor = '#323232'; // Match news item style
+        keypoint.style.backgroundColor = '#323232';
         keypoint.style.padding = '10px';
         keypoint.style.borderRadius = '8px';
         keypoint.style.borderBottom = '1px solid #444';
@@ -471,8 +471,12 @@ document.addEventListener("DOMContentLoaded", function() {
     
         keypoint.appendChild(pointsList);
     
-        // Append the new item at the bottom instead of the top
-        keypoints.appendChild(keypoint);
+        // Add to the top of the container
+        if (keypoints.firstChild) {
+            keypoints.insertBefore(keypoint, keypoints.firstChild);
+        } else {
+            keypoints.appendChild(keypoint);
+        }
     
         // Track this item
         displayedAnalysis.push(keypoint);
@@ -501,7 +505,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, 100);
     }
-    
     
     // Function to add new news item at the top
     function addNewsItem(newsItem) {
@@ -585,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newsElement.appendChild(title);
         newsElement.appendChild(content);
         
-        // Add to the beginning of the container
+        // Add to the top of the container
         if (newsContent.firstChild) {
             newsContent.insertBefore(newsElement, newsContent.firstChild);
         } else {
@@ -614,35 +617,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Function to add a new pair of related content
-    function addRelatedContent(n) {
-    for (let i = 0; i < n; i++) {
-        const currentItem = contentItems[i % contentItems.length];
-
-        // Add new items at the top of each section
-        addNewsItem(currentItem.news);
-
-        // Move to next item
-        }
-    }
-
-    function addAnalysisContent() {
+    function addRelatedContent() {
         const currentItem = contentItems[currentItemIndex];
         
         // Add new items at the top of each section
         addAnalysisItem(currentItem.analysis);
+        addNewsItem(currentItem.news);
         
         // Move to next item
         currentItemIndex = (currentItemIndex + 1) % contentItems.length;
     }
     
-    // Set initial content (first item)
-    addAnalysisContent();
+    // Add initial items (starting with 2)
+    addRelatedContent(); // Add first item
     
-    // Set up interval for content rotation
-    setInterval(addAnalysisContent, 6000);
-
-    // Set initial content (first item)
-    addRelatedContent(10);
-
+    // Set a timeout to add the second item after 1 second
+    setTimeout(() => {
+        addRelatedContent();
+        
+        // Then set up the regular interval for additional items
+        setInterval(addRelatedContent, 4000);
+    }, 1000);
 });
 
