@@ -4,6 +4,7 @@ from .rag.memoripy_handler import MemoripyHandler
 from dotenv import load_dotenv 
 import os
 load_dotenv()
+
 GEMINI_API = os.getenv("GEMINI_API_KEY")
 
 DATA_DIR = "../data"
@@ -18,27 +19,33 @@ You are provided with the following:
 Return a query to give to an LLM that returns all the information required. Only write the query, don't provide any other output
 
 """
-user_id = 0
-llm = GeminiHandler(GEMINI_API, "gemini-2.0-flash")
-user_info = open("../assets/client_0.json", "r").read()
-embedding = WordLlamaHanlder()
-memory = MemoripyHandler(os.path.join(DATA_DIR, "llm_memory.json"), embedding, llm, 1)
-user_memory = MemoripyHandler(os.path.join(DATA_DIR, str(user_id) + ".json"), embedding, llm, 1)
-user_memory.load()
-memory.load()
-history = [{"role": "user", "content": "I want to switch to a conservative approach on my portfolio."}]
-def ask_llm(history: list):
-    similar_prompts = memory.retrieve_interactions(history[-1]["content"], require_metadata=True)
-    similar_memories = memory.retrieve_interactions(history[-1]["content"])
-    llm.enable_search(False)
-    prompt = [PROMPT, "\nPrevious interactions with LLMs" + similar_prompts, "\nExtra context with the user:" + similar_memories + "\nUser Information: " + user_info]
-    r = llm.get_response(history, prompt, [])
-    print(prompt)
-    print("----")
-    print(r)
-    print("---")
-    r2 = llm.get_response(history, [r, "\nUser Information: " + user_info], [])
-    print(r2)
+class ResponsePipeline():
+    def __init__(self, user_id: int, context_size: int=15) -> None:
+        self.user_id = user_id
+        self.context_size = context_size
 
-ask_llm(history)
+        self.llm = GeminiHandler(GEMINI_API, "gemini-2.0-flash")
+        self.user_info = open(f"../assets/client_{str(user_id)}.json", "r").read()
+        self.embedding = WordLlamaHanlder()
+        self.memory = MemoripyHandler(os.path.join(DATA_DIR, "llm_memory.json"), self.embedding, self.llm, 1)
+        self.user_memory = MemoripyHandler(os.path.join(DATA_DIR, str(user_id) + ".json"), self.embedding, self.llm, 1)
+        self.user_memory.load()
+        self.memory.load()
+    
+    def get_answer(self, history: list) -> str:
+        """Get pipeline answer
 
+        Args:
+            history: openai-format of the history 
+
+        Returns:
+            The LLM answer
+        """
+        similar_prompts = self.memory.retrieve_interactions(history[-1]["content"], require_metadata=True)
+        similar_memories = self.user_memory.retrieve_interactions(history[-1]["content"])
+        self.llm.enable_search(False)
+        prompt = [PROMPT, "\nPrevious interactions with LLMs" + similar_prompts, "\nExtra context with the user:" + similar_memories + "\nUser Information: " + self.user_info]
+        r = self.llm.get_response(history, prompt, [])
+        r2 = self.llm.get_response(history, [r, "\n\nUser Information:\n" + self.user_info], [])
+        self.llm.enable_search(True)
+        return r

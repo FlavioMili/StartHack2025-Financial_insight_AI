@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () { //VIEW SELECTOR LOGIC 
     const buttons = document.querySelectorAll(".view-btn");
     if (buttons.length === 0) {
         console.error("Nessun elemento .view-btn trovato nel DOM.");
@@ -14,10 +14,31 @@ document.addEventListener("DOMContentLoaded", function () {
             text1.style.display = "none";
             text2.style.display = "none";
 
-            if (this.dataset.view === "testo1") {
+            if (this.dataset.view === "text1") {
                 text1.style.display = "block";
-            } else if (this.dataset.view === "testo2") {
+            } else if (this.dataset.view === "text2") {
                 text2.style.display = "block";
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () { //PIE CHART 
+    const buttons = document.querySelectorAll(".view-btn");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            const selectedView = this.getAttribute("data-view");
+            document.getElementById("text1").style.display = selectedView === "text1" ? "block" : "none";
+            document.getElementById("text2").style.display = selectedView === "text2" ? "block" : "none";
+
+            console.log("Selected view:", selectedView);
+            if (selectedView === "text2") {
+                console.log("diocane");
+                renderPieChart(); // Disegna il grafico quando si seleziona la Vista 2
             }
         });
     });
@@ -77,3 +98,4 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Errore nel caricamento del JSON:", error);
     }
 });
+
