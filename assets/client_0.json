@@ -1,25 +1,54 @@
 {
   "client": {
-      "Name": "Hans Müller",
-      "TaxZone": "Switzerland",
-      "NetWorth": {
-        "Stock": 500000,
-        "Bonds": 200000,
-        "Real_Estate": 300000,
-        "Other": 100000
-      },
-      "Taxes": {
-        "Income_Tax": 0.0,
-        "Capital_Gain_Tax": 0.26,
-        "Dividend_Tax": 0.26,
-        "Wealth_Tax": 0.0,
-        "Real_Estate_Tax": 0.01
-      },
-      "Profile": {
-        "Data_Literacy": "Data-Driven",
-        "Emotivity": "Statesman",
-        "Time_Horizon": "Legacy-Oriented",
-        "Risk_Aversion": "Balanced Growth"
-      }
+    "Name": "Matthias Schneider",
+    "TaxZone": "Switzerland (Saint Gallen)",
+    "NetWorth": {
+      "Stock": 4_000_000,
+      "Bonds": 2_000_000,
+      "Real_Estate": 8_000_000,
+      "Other": 1_000_000
+    },
+    "Taxes": {
+      "Income_Tax": 35.0,
+      "Capital_Gain_Tax": 0.0,
+      "Dividend_Tax": 35.0,
+      "Wealth_Tax": 0.3
+    },
+    "Profile": {
+      "Data_Literacy": "Data-Driven",
+      "Emotivity": "Pragmatic",
+      "Time_Horizon": "Long-Term Growth",
+      "Risk_Aversion": "Moderate"
+    },
+    "Portfolio": {
+      "Stocks": [
+        {
+          "Name": "Nestlé S.A.",
+          "Current_Price": 112.50,
+          "Fluctuation_Percent": 1.8
+        },
+        {
+          "Name": "Roche Holding AG",
+          "Current_Price": 278.00,
+          "Fluctuation_Percent": 2.2
+        },
+        {
+          "Name": "LVMH Moët Hennessy Louis Vuitton",
+          "Current_Price": 725.00,
+          "Fluctuation_Percent": 1.5
+        },
+        {
+          "Name": "SAP SE",
+          "Current_Price": 145.00,
+          "Fluctuation_Percent": 2.0
+        },
+        {
+          "Name": "Tesla Inc.",
+          "Current_Price": 920.00,
+          "Fluctuation_Percent": -7.0
+        }
+      ]
+    }
   }
 }
+

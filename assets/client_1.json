@@ -1,0 +1,56 @@
+{
+  "client": {
+    "Name": "Giovanni Molinari",
+    "TaxZone": "Italy",
+    "NetWorth": {
+      "Stock": 500000,
+      "Bonds": 200000,
+      "Real_Estate": 300000,
+      "Other": 100000
+    },
+    "Taxes": {
+      "Capital_Gain_Tax": 26.0,
+      "Dividend_Tax": 26.0,
+      "Wealth_Tax": {
+        "Financial_Assets_Abroad": 0.2,
+        "Real_Estate_Abroad": 0.76
+      },
+      "Real_Estate_Tax": 1.06
+    },
+    "Profile": {
+      "Data_Literacy": "Data-Driven",
+      "Emotivity": "Statesman",
+      "Time_Horizon": "Legacy-Oriented",
+      "Risk_Aversion": "Balanced Growth"
+    },
+    "Portfolio": {
+      "Stocks": [
+        {
+          "Name": "Enel S.p.A.",
+          "Current_Price": 8.50,
+          "Fluctuation_Percent": 1.2
+        },
+        {
+          "Name": "Eni S.p.A.",
+          "Current_Price": 13.75,
+          "Fluctuation_Percent": -0.8
+        },
+        {
+          "Name": "Fiat Chrysler Automobiles",
+          "Current_Price": 14.20,
+          "Fluctuation_Percent": 2.5
+        },
+        {
+          "Name": "Intesa Sanpaolo",
+          "Current_Price": 2.35,
+          "Fluctuation_Percent": -12.0
+        },
+        {
+          "Name": "UniCredit S.p.A.",
+          "Current_Price": 10.50,
+          "Fluctuation_Percent": 0.5
+        }
+      ]
+    }
+  }
+}
