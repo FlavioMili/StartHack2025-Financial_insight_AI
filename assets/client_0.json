@@ -24,28 +24,28 @@
       "Stocks": [
         {
           "Name": "Nestlé S.A.",
-          "Current_Price": 112.50,
-          "Fluctuation_Percent": 1.8
+          "Current_Price": 91.2,
+          "Fluctuation_Percent": 11
         },
         {
           "Name": "Roche Holding AG",
-          "Current_Price": 278.00,
-          "Fluctuation_Percent": 2.2
+          "Current_Price": 306.12,
+          "Fluctuation_Percent": 3.6
         },
         {
           "Name": "LVMH Moët Hennessy Louis Vuitton",
-          "Current_Price": 725.00,
-          "Fluctuation_Percent": 1.5
+          "Current_Price": 604.50,
+          "Fluctuation_Percent": -13
         },
         {
           "Name": "SAP SE",
-          "Current_Price": 145.00,
-          "Fluctuation_Percent": 2.0
+          "Current_Price": 250.15,
+          "Fluctuation_Percent": -9
         },
         {
           "Name": "Tesla Inc.",
-          "Current_Price": 920.00,
-          "Fluctuation_Percent": -7.0
+          "Current_Price": 236.26,
+          "Fluctuation_Percent": -31
         }
       ],
       "Bonds" : []
