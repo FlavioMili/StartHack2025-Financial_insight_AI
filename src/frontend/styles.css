@@ -54,7 +54,7 @@ nav ul li a:hover {
 /* DASHBOARD GRID */
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 0.75fr 1.5fr;
   gap: 20px;
   flex-grow: 1;
   height: calc(100% - 20px); /* Riduce leggermente l'altezza per lasciare spazio */
@@ -75,23 +75,16 @@ nav ul li a:hover {
   gap: 15px;
   justify-content: space-between; /* Distribuisce le card uniformemente */
   height: 100%;
+  flex-grow: 1; /* Fa in modo che la colonna cresca e prenda tutto lo spazio disponibile */
 }
 
 /* CARDS */
-.card {
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
-  margin-bottom: 10px; /* Aggiunge ulteriore spazio sotto ogni card */
-}
 
 
 .right-column .card, .left-column .card {
   flex-grow: 1; /* Le card si adattano allo spazio disponibile */
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 /* CARDS */
 .card {
@@ -102,10 +95,12 @@ nav ul li a:hover {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
-.card:hover {
-  transform: translateY(-1px);
+.card.profile-card{
+  max-height: 250px !important;
 }
 
 .card h2 {
@@ -144,7 +139,7 @@ nav ul li a:hover {
 .profile-badge, .tax-badge {
   background: transparent;
   color: white;
-  border: 2px solid white;
+  border: 2px solid rgb(205, 72, 43);;
   padding: 5px 5px;
   border-radius: 20px;
   font-weight: bold;
@@ -156,9 +151,6 @@ nav ul li a:hover {
   margin-bottom: 2px;
 }
 
-#tax-info {
-
-}
 
 #client-name-container {
   display: flex;
@@ -168,6 +160,7 @@ nav ul li a:hover {
   white-space: nowrap; /* Evita che il testo si spezzi */
   margin: 0px;
   padding: 0px;
+  padding-top: 10px;
   height: 20px;
   margin-bottom: 10px;
 }
@@ -175,27 +168,221 @@ nav ul li a:hover {
 
 #portfolio-selector-container {
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
   gap: 15px;
   min-height: 50px; /* Assicura un'altezza minima costante */
 }
 
 #portfolio-selector-container h2 {
   margin: 0;
+  margin-bottom: 10px;
   line-height: 50px; /* Mantiene l'allineamento verticale */
 }
 
 .view-btn{
   background-color: transparent;
-  border: 2px solid red;
+  border: 2px solid rgb(205, 72, 43);
   color: white;
   font-size: 150;
   border-radius: 5px;
   padding: 5px 10px;
   margin: 0px;
+  height: 40px;
+  margin-top: 5px;
 }
 
 .active{
-  background-color: red;
+  background-color: rgb(205, 72, 43);
   color: white;
+}
+
+.portfolio-container{
+  height: 200px;
+  display: flex;
+  
+  /*max-height: 300px;*/
+  overflow: hidden;
+  text-align: left !important;
+
+  
+}
+
+#pieChart {
+  max-height: 700px !important; /* Forza il limite */
+  width: auto !important;
+}
+
+.pieChart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 400px !important;
+  overflow: hidden;
+}
+
+.response-box {
+  background-color: #323232; /* Colore di sfondo viola */
+  color: white; /* Testo bianco */
+  padding: 8px; /* Spazio interno per migliorare la leggibilità */
+  border-radius: 8px; /* Angoli arrotondati */
+  margin-top: 5px; /* Distanza dal titolo */
+  margin-bottom: 5px;
+  font-size: 16px; /* Dimensione del testo */
+  line-height: 1.5; /* Spaziatura tra le righe */
+  user-select: none; /* Impedisce la selezione del testo */
+  min-height: 100px; /* Altezza minima */
+  display: flex;
+  align-items: left; /* Allinea il testo verticalmente */
+  justify-content:first baseline; /* Centra orizzontalmente */
+  flex-grow: 1; /* Permette di occupare tutto lo spazio disponibile */
+}
+
+.response-box{
+  margin-bottom: 20px;
+  min-height: 100px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #323232;
+}
+
+.response-box ::-webkit-scrollbar{
+  width: 6px;
+}
+
+.response-box::-webkit-scrollbar-thumb{
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.keypoints h3{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.keypoints ul{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.call-box{
+  max-height: 350px;
+  min-height: 350px;
+}
+
+.enphasis{
+  color: rgb(205, 72, 43);
+}
+
+.bottom-row {
+  display: flex;
+  flex-direction: row; /* Dispone le card affiancate */
+  gap: 15px; /* Spazio tra le card */
+  justify-content: space-between; /* Distribuisce le card uniformemente */
+  flex-grow: 1; /* Permette di occupare lo spazio rimanente */
+  height: 100%; /* Assicura che riempia la colonna */
+}
+
+.bottom-row .card {
+  flex: 1; /* Le card si espandono equamente */
+  min-width: 45%; /* Impedisce che si rimpiccioliscano troppo */
+  max-width: 50%; /* Evita che occupino più della metà */
+  height: 100%; /* Le card riempiono lo spazio disponibile */
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box {
+    background-color: #323232; /* Stesso colore della response-box */
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    user-select: none;
+    min-height: 200px; /* Stessa altezza della response-box */
+    max-height: 400px; /* Permette lo scrolling */
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #323232;
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.chat-input-container {  
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra orizzontalmente */
+  box-sizing: border-box;
+  padding-top: 5px !important;
+  padding-left: 0px !important; /* Ridotto da 10px a 5px */
+  padding-right: 0px !important;
+  background-color: #1e1e1e; /* Stesso colore della card */
+}
+
+.chat-input {
+    box-sizing: border-box;
+    height: 40px; /* Imposta un'altezza fissa */
+    border: none; /* Rimuove completamente il bordo */
+    outline: none; /* Rimuove l'outline quando si clicca sulla textarea */
+    border-radius: 5px;
+    background-color: #323232;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif; /* Usa lo stesso font del body */
+    text-align: left; /* Centra il testo dentro l'input */
+    resize: none; /* Impedisce il ridimensionamento */
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.chatbot-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 350px;
+    overflow: hidden; /* Impedisce che l'input esca */
+}
+
+.chatbot-card h2{
+  margin-bottom: 0px;
+}
+
+.chatbot-card .chat-box {
+    flex-grow: 1; /* Occupa tutto lo spazio disponibile sopra l'input */
+    overflow-y: auto;
+}
+
+.chatbot-card .chat-input-container {  
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px; /* Ridotto da 10px a 5px */
+  background-color: #1e1e1e; /* Stesso colore della card */
+  flex-shrink: 0; /* Impedisce che l'input venga schiacciato */
+}
+
+.chatbot-card .chat-input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 40px; /* Imposta un'altezza fissa */
+    border-radius: 5px;
+    background-color: #323232;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    resize: none; /* Impedisce il ridimensionamento */
 }

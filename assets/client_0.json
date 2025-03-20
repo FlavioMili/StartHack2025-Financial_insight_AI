@@ -1,12 +1,12 @@
 {
   "client": {
     "Name": "Matthias Schneider",
-    "TaxZone": "Switzerland (Saint Gallen)",
+    "TaxZone": "Switzerland",
     "NetWorth": {
-      "Stock": 4_000_000,
-      "Bonds": 2_000_000,
-      "Real_Estate": 8_000_000,
-      "Other": 1_000_000
+      "Stock": 4000000,
+      "Bonds": 2000000,
+      "Real_Estate": 8000000,
+      "Other": 1000000
     },
     "Taxes": {
       "Income_Tax": 35.0,
@@ -47,7 +47,8 @@
           "Current_Price": 920.00,
           "Fluctuation_Percent": -7.0
         }
-      ]
+      ],
+      "Bonds" : []
     }
   }
 }

@@ -1,0 +1,29 @@
+{"responses": [
+        {
+            "question": "Why does Alphabet Stocks plummet?",
+            "keypoints": [
+                {
+                    "title": "Market Reaction to Earnings",
+                    "points": [
+                        "Alphabet missed revenue/earnings expectations.",
+                        "Slower growth in key segments (e.g., cloud, ad revenue)."
+                    ]
+                },
+                {
+                    "title": "Competitive Pressure",
+                    "points": [
+                        "AI competition (Microsoft, OpenAI) impacting market confidence.",
+                        "Concerns over Google’s search dominance weakening."
+                    ]
+                },
+                {
+                    "title": "Regulatory Risks",
+                    "points": [
+                        "Ongoing antitrust lawsuits in the U.S. and EU.",
+                        "Potential fines and restrictions affecting future profitability."
+                    ]
+                }
+            ]
+        }
+    ]
+}

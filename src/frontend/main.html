@@ -12,6 +12,7 @@
             <h1><img src="assets/SIX_Group_logo.png" alt="SIX Logo" class="logo"></h1>
             <nav>
                 <ul>
+                    <li><a href="#">Daily Report</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </nav>
@@ -35,12 +36,13 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card portfolio-container">
                   <div id="portfolio-selector-container">
                     <h2>PORTFOLIO</h2>
-                      <button class="view-btn active" data-view="text1">Assets</button>
-                      <button class="view-btn" data-view="text2">Pie Chart</button>
-                  </div>
+                      <button class="view-btn" data-view="text1">Assets</button>
+                      <button class="view-btn active" data-view="text2">Pie Chart</button>
+                      <button class="view-btn " data-view="text3">Trend</button>
+                    </div>
 
                   <div id="viewContainer">
                       <div id="text1" style="display: none;">
@@ -59,23 +61,59 @@
                           </table>
                       </div>
                       <div id="text2" style="display: none;">
-                        <canvas id="pieChart"></canvas>
+                        <div class="pieChart-container">
+                          <canvas id="pieChart"></canvas>
+                      </div>
                       </div>
                   </div>
                 </div>
 
-                <div class="card">
-                    <h2>SPAZIO NEWS</h2>
-                </div>
+                
             </div>
 
             <!-- Colonna di destra con 2 card -->
             <div class="column right-column">
-                <div class="card">
-                    <h2>SPAZIO ESITI NOSTRO LLM</h2>
+                <div class="card call-box">
+                    <h2>Real-Time Analysis</h2>
+                    <div class="response-box">
+                        <div class="keypoints">
+                            <div class="keypoint">
+                                <h3>1. Market Reaction to Earnings</h3>
+                                <ul>
+                                    <li>Alphabet missed revenue/earnings expectations.</li>
+                                    <li>Slower growth in key segments (e.g., cloud, ad revenue).</li>
+                                </ul>
+                            </div>
+                            <div class="keypoint">
+                                <h3>2. Competitive Pressure</h3>
+                                <ul>
+                                    <li>AI competition (Microsoft, OpenAI) impacting market confidence.</li>
+                                    <li>Concerns over Google’s search dominance weakening.</li>
+                                </ul>
+                            </div>
+                            <div class="keypoint">
+                                <h3>3. Regulatory Risks</h3>
+                                <ul>
+                                    <li>Ongoing antitrust lawsuits in the U.S. and EU.</li>
+                                    <li>Potential fines and restrictions affecting future profitability.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h2>SPAZIO "CHATBOT"</h2>
+                <div class="bottom-row">
+                    <div class="card">
+                        <h2>News</h2>
+                    </div>
+                    <div class="card chatbot-card">
+                        <h2>ChatBOT</h2>
+                        <div class="chat-box">
+                          <script src="responde_loading.js"></script>
+                        </div>
+                        <div class="chat-input-container">
+                            <textarea class="chat-input" placeholder="Scrivi un messaggio..."></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -83,7 +121,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="basic_behaviour.js"></script>
-    <script src="script.js"></script>
+    
     <script src="piechart.js"></script>
 </body>
 </html>

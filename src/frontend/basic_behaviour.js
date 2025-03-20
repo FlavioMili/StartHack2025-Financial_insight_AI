@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", function () { //VIEW SELECTOR LOGI
     const text1 = document.getElementById("text1");
     const text2 = document.getElementById("text2");
 
-    text1.style.display = "block"; // Mostra la Vista 1 di default
+    text2.style.display = "block"; // Mostra la Vista 1 di default
+
+        renderPieChart(); // Disegna il grafico quando si seleziona la Vista 2
+    
 
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -35,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () { //PIE CHART
             document.getElementById("text1").style.display = selectedView === "text1" ? "block" : "none";
             document.getElementById("text2").style.display = selectedView === "text2" ? "block" : "none";
 
-            console.log("Selected view:", selectedView);
             if (selectedView === "text2") {
-                console.log("diocane");
                 renderPieChart(); // Disegna il grafico quando si seleziona la Vista 2
             }
         });
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () { //PIE CHART
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch("/assets/client_data.json");
+        const response = await fetch("/assets/client_0.json");
         const data = await response.json();
         const client = data.client;
 
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const taxInfo = document.getElementById("tax-info");
         for (const [taxType, taxValue] of Object.entries(client.Taxes)) {
             let taxElement = document.createElement("p");
-            taxElement.innerHTML = `<strong>${taxType.replace(/_/g, " ")}:</strong> ${taxValue > 0 ? taxValue+"%" : "n.a."}`;
+            taxElement.innerHTML = `<strong class="enphasis">${taxType.replace(/_/g, " ")}:</strong> ${taxValue > 0 ? taxValue+"%" : "n.a."}`;
             taxInfo.appendChild(taxElement);
         }
 
