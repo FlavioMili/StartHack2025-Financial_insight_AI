@@ -47,12 +47,17 @@ document.addEventListener("DOMContentLoaded", function () { //PIE CHART
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch("http://127.0.0.1:5000/get_user/0");
+        const response = await fetch("http://127.0.0.1:5000/get_user/0", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
         
         if (!response.ok) {
             throw new Error(`Errore HTTP! Stato: ${response.status}`);
         }
-        
+
         const data = await response.json();
         const client = data.client;
 
