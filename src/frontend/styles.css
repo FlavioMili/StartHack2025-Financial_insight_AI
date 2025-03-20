@@ -171,3 +171,31 @@ nav ul li a:hover {
   height: 20px;
   margin-bottom: 10px;
 }
+
+
+#portfolio-selector-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 50px; /* Assicura un'altezza minima costante */
+}
+
+#portfolio-selector-container h2 {
+  margin: 0;
+  line-height: 50px; /* Mantiene l'allineamento verticale */
+}
+
+.view-btn{
+  background-color: transparent;
+  border: 2px solid red;
+  color: white;
+  font-size: 150;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0px;
+}
+
+.active{
+  background-color: red;
+  color: white;
+}
