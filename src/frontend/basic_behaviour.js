@@ -221,3 +221,417 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Populate the News section with relevant financial news
+document.addEventListener("DOMContentLoaded", function() {
+    const newsContainer = document.querySelector('.bottom-row .card:first-child');
+    
+    if (newsContainer) {
+        // Create news container
+        const newsContent = document.createElement('div');
+        newsContent.className = 'news-content';
+        
+        // Style the news container to match dark theme
+        newsContent.style.maxHeight = '280px';
+        newsContent.style.overflowY = 'auto';
+        newsContent.style.padding = '0 5px';
+        newsContent.style.scrollbarWidth = 'thin';
+        newsContent.style.scrollbarColor = '#888 #323232';
+        
+        // Add news items
+        const newsItems = [
+        
+        ];
+        
+        // Add each news item to the container
+        newsItems.forEach(item => {
+            const newsItem = document.createElement('div');
+            newsItem.className = 'news-item';
+            newsItem.style.marginBottom = '15px';
+            newsItem.style.borderBottom = '1px solid #444';
+            newsItem.style.paddingBottom = '10px';
+            newsItem.style.backgroundColor = '#323232';
+            newsItem.style.padding = '10px';
+            newsItem.style.borderRadius = '8px';
+            
+            // Create metadata container
+            const metaContainer = document.createElement('div');
+            metaContainer.style.display = 'flex';
+            metaContainer.style.alignItems = 'center';
+            metaContainer.style.marginBottom = '6px';
+            
+            // Create category badge
+            const category = document.createElement('span');
+            category.className = 'news-category';
+            category.textContent = item.category;
+            category.style.backgroundColor = 'rgb(205, 72, 43)';
+            category.style.color = 'white';
+            category.style.padding = '3px 8px';
+            category.style.borderRadius = '4px';
+            category.style.fontSize = '12px';
+            category.style.marginRight = '10px';
+            category.style.fontWeight = 'bold';
+            
+            // Create date element
+            const date = document.createElement('span');
+            date.className = 'news-date';
+            date.textContent = item.date;
+            date.style.color = '#aaa';
+            date.style.fontSize = '12px';
+            date.style.fontWeight = '500';
+            
+            // Create title
+            const title = document.createElement('h3');
+            title.className = 'news-title';
+            title.textContent = item.title;
+            title.style.fontSize = '16px';
+            title.style.margin = '8px 0';
+            title.style.color = 'white';
+            title.style.fontWeight = 'bold';
+            
+            // Create content
+            const content = document.createElement('p');
+            content.className = 'news-content';
+            content.textContent = item.content;
+            content.style.fontSize = '14px';
+            content.style.color = '#ccc';
+            content.style.lineHeight = '1.4';
+            content.style.margin = '0';
+            
+            // Append elements properly
+            metaContainer.appendChild(category);
+            metaContainer.appendChild(date);
+            
+            newsItem.appendChild(metaContainer);
+            newsItem.appendChild(title);
+            newsItem.appendChild(content);
+            
+            // Append news item to news content
+            newsContent.appendChild(newsItem);
+        });
+        
+        // Append news content to news container
+        newsContainer.appendChild(newsContent);
+    } else {
+        console.error("News container not found in the DOM");
+    }
+});
+
+// Add this function to create content rotation for both analysis and news
+document.addEventListener("DOMContentLoaded", function() {
+    // Define related content items (analysis and news pairs that appear together)
+    const contentItems = [
+        {
+            analysis: {
+                title: "AI Competition Intensifies in Financial Sector",
+                points: [
+                    "Alphabet's new AI financial tools targeting wealth management firms.",
+                    "40% improvement in insights delivery reported by early partners."
+                ]
+            },
+            news: {
+                title: "Alphabet's AI Division Announces Revolutionary Financial Analysis Tool",
+                content: "In a move to regain market confidence, Alphabet unveiled a new AI-powered financial analysis platform targeting wealth management firms.",
+                date: "March 19, 2025",
+                category: "Technology"
+            }
+        },
+        {
+            analysis: {
+                title: "Regulatory Environment Shifting",
+                points: [
+                    "EU Digital Markets Act implementation finalized.",
+                    "Tech companies face September compliance deadline."
+                ]
+            },
+            news: {
+                title: "EU Finalizes Digital Markets Act Implementation",
+                content: "Major tech companies including Alphabet and Microsoft have until September to comply with the EU's strict new digital market regulations.",
+                date: "March 18, 2025",
+                category: "Regulation"
+            }
+        },
+        {
+            analysis: {
+                title: "Interest Rate Outlook",
+                points: [
+                    "Fed signals possible rate cut in June meeting.",
+                    "Inflation metrics showing signs of stabilization."
+                ]
+            },
+            news: {
+                title: "Federal Reserve Holds Rates Steady, Signals Possible Cut",
+                content: "The Federal Reserve maintained the current interest rate range today, but Chair Janet Powell hinted at a possible rate cut in June.",
+                date: "March 20, 2025",
+                category: "Economy"
+            }
+        },
+        {
+            analysis: {
+                title: "Bond Market Reaction",
+                points: [
+                    "Treasury yields falling on rate cut expectations.",
+                    "10-year yield at lowest level since December 2024."
+                ]
+            },
+            news: {
+                title: "Bond Markets Rally on Fed Comments",
+                content: "Treasury bonds rallied following the Federal Reserve's latest signals, with the benchmark 10-year yield falling to 3.2%.",
+                date: "March 20, 2025",
+                category: "Markets"
+            }
+        },
+        {
+            analysis: {
+                title: "SIX Group's Digital Asset Growth",
+                points: [
+                    "Record transaction volumes in Q1 2025.",
+                    "Institutional adoption accelerating in European markets."
+                ]
+            },
+            news: {
+                title: "SIX Group Reports 15% Growth in Digital Asset Services",
+                content: "SIX Group's digital asset platform saw record transaction volumes in Q1 2025, as institutional adoption continues to accelerate.",
+                date: "March 17, 2025",
+                category: "Markets"
+            }
+        },
+        {
+            analysis: {
+                title: "Strategic Partnerships Expansion",
+                points: [
+                    "SIX Group forms alliances with three major European banks.",
+                    "Digital asset custody and settlement network expanding."
+                ]
+            },
+            news: {
+                title: "SIX Group Expands Institutional Blockchain Services",
+                content: "SIX Group announced strategic partnerships with three major European banks today, expanding its digital asset network across the continent.",
+                date: "March 18, 2025",
+                category: "Finance"
+            }
+        }
+    ];
+    
+    let currentItemIndex = 0;
+    const maxItemsToShow = 3; // Maximum number of analysis items to show before removing old ones
+    
+    // Keep track of displayed items
+    const displayedAnalysis = [];
+    const displayedNews = [];
+    
+    // Function to add new analysis item at the top
+    function addAnalysisItem(analysisItem) {
+        const responseBox = document.querySelector('.response-box');
+        if (!responseBox) return;
+        
+        // Get or create keypoints container
+        let keypoints = responseBox.querySelector('.keypoints');
+        if (!keypoints) {
+            keypoints = document.createElement('div');
+            keypoints.className = 'keypoints';
+            responseBox.appendChild(keypoints);
+        }
+        
+        // Create new keypoint element with fade-in animation
+        const keypoint = document.createElement('div');
+        keypoint.className = 'keypoint';
+        keypoint.style.opacity = '0';
+        keypoint.style.transition = 'opacity 0.7s ease-in-out';
+        keypoint.style.marginBottom = '15px';
+        keypoint.style.backgroundColor = '#323232'; // Match news item style
+        keypoint.style.padding = '10px';
+        keypoint.style.borderRadius = '8px';
+        keypoint.style.borderBottom = '1px solid #444';
+        
+        // Add title 
+        const title = document.createElement('h3');
+        title.textContent = analysisItem.title;
+        title.style.color = 'white';
+        title.style.fontSize = '16px';
+        title.style.margin = '8px 0';
+        title.style.fontWeight = 'bold';
+        keypoint.appendChild(title);
+        
+        // Create points list but keep bullet points invisible initially
+        const pointsList = document.createElement('ul');
+        pointsList.style.color = '#ccc';
+        pointsList.style.fontSize = '14px';
+        pointsList.style.lineHeight = '1.4';
+        
+        // Create list items with individual fade-in transitions
+        const listItems = [];
+        analysisItem.points.forEach(point => {
+            const listItem = document.createElement('li');
+            listItem.textContent = point;
+            listItem.style.opacity = '0';
+            listItem.style.transition = 'opacity 0.5s ease-in-out';
+            pointsList.appendChild(listItem);
+            listItems.push(listItem);
+        });
+        
+        keypoint.appendChild(pointsList);
+        
+        // Add to the beginning of the container
+        if (keypoints.firstChild) {
+            keypoints.insertBefore(keypoint, keypoints.firstChild);
+        } else {
+            keypoints.appendChild(keypoint);
+        }
+        
+        // Track this item
+        displayedAnalysis.push(keypoint);
+        
+        // Remove oldest item if we exceed the limit
+        if (displayedAnalysis.length > maxItemsToShow) {
+            const oldestItem = displayedAnalysis.shift();
+            // Fade out before removing
+            oldestItem.style.opacity = '0';
+            setTimeout(() => {
+                if (oldestItem.parentNode) {
+                    oldestItem.parentNode.removeChild(oldestItem);
+                }
+            }, 500);
+        }
+        
+        // Fade in the keypoint container first
+        setTimeout(() => {
+            keypoint.style.opacity = '1';
+            
+            // Then fade in each bullet point with a staggered delay
+            listItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                }, 300 + (index * 200)); // Start after 300ms, then 200ms for each point
+            });
+        }, 100);
+    }
+    
+    // Function to add new news item at the top
+    function addNewsItem(newsItem) {
+        const newsContainer = document.querySelector('.bottom-row .card:first-child');
+        if (!newsContainer) return;
+        
+        // Get or create news content div
+        let newsContent = newsContainer.querySelector('.news-content');
+        if (!newsContent) {
+            newsContent = document.createElement('div');
+            newsContent.className = 'news-content';
+            newsContent.style.maxHeight = '280px';
+            newsContent.style.overflowY = 'auto';
+            newsContent.style.padding = '0 5px';
+            newsContent.style.scrollbarWidth = 'thin';
+            newsContent.style.scrollbarColor = '#888 #323232';
+            newsContainer.appendChild(newsContent);
+        }
+        
+        // Create new news item
+        const newsElement = document.createElement('div');
+        newsElement.className = 'news-item';
+        newsElement.style.marginBottom = '15px';
+        newsElement.style.borderBottom = '1px solid #444';
+        newsElement.style.paddingBottom = '10px';
+        newsElement.style.backgroundColor = '#323232';
+        newsElement.style.padding = '10px';
+        newsElement.style.borderRadius = '8px';
+        newsElement.style.opacity = '0';
+        newsElement.style.transition = 'opacity 0.7s ease-in-out';
+        
+        // Create metadata container
+        const metaContainer = document.createElement('div');
+        metaContainer.style.display = 'flex';
+        metaContainer.style.alignItems = 'center';
+        metaContainer.style.marginBottom = '6px';
+        
+        // Create category badge
+        const category = document.createElement('span');
+        category.className = 'news-category';
+        category.textContent = newsItem.category;
+        category.style.backgroundColor = 'rgb(205, 72, 43)';
+        category.style.color = 'white';
+        category.style.padding = '3px 8px';
+        category.style.borderRadius = '4px';
+        category.style.fontSize = '12px';
+        category.style.marginRight = '10px';
+        category.style.fontWeight = 'bold';
+        
+        // Create date element
+        const date = document.createElement('span');
+        date.className = 'news-date';
+        date.textContent = newsItem.date;
+        date.style.color = '#aaa';
+        date.style.fontSize = '12px';
+        date.style.fontWeight = '500';
+        
+        // Create title
+        const title = document.createElement('h3');
+        title.className = 'news-title';
+        title.textContent = newsItem.title;
+        title.style.fontSize = '16px';
+        title.style.margin = '8px 0';
+        title.style.color = 'white';
+        title.style.fontWeight = 'bold';
+        
+        // Create content
+        const content = document.createElement('p');
+        content.className = 'news-content';
+        content.textContent = newsItem.content;
+        content.style.fontSize = '14px';
+        content.style.color = '#ccc';
+        content.style.lineHeight = '1.4';
+        content.style.margin = '0';
+        
+        // Assemble the news item
+        metaContainer.appendChild(category);
+        metaContainer.appendChild(date);
+        
+        newsElement.appendChild(metaContainer);
+        newsElement.appendChild(title);
+        newsElement.appendChild(content);
+        
+        // Add to the beginning of the container
+        if (newsContent.firstChild) {
+            newsContent.insertBefore(newsElement, newsContent.firstChild);
+        } else {
+            newsContent.appendChild(newsElement);
+        }
+        
+        // Track this item
+        displayedNews.push(newsElement);
+        
+        // Remove oldest item if we exceed the limit
+        if (displayedNews.length > maxItemsToShow) {
+            const oldestItem = displayedNews.shift();
+            // Fade out before removing
+            oldestItem.style.opacity = '0';
+            setTimeout(() => {
+                if (oldestItem.parentNode) {
+                    oldestItem.parentNode.removeChild(oldestItem);
+                }
+            }, 500);
+        }
+        
+        // Fade in the new item
+        setTimeout(() => {
+            newsElement.style.opacity = '1';
+        }, 100);
+    }
+    
+    // Function to add a new pair of related content
+    function addRelatedContent() {
+        const currentItem = contentItems[currentItemIndex];
+        
+        // Add new items at the top of each section
+        addAnalysisItem(currentItem.analysis);
+        addNewsItem(currentItem.news);
+        
+        // Move to next item
+        currentItemIndex = (currentItemIndex + 1) % contentItems.length;
+    }
+    
+    // Set initial content (first item)
+    addRelatedContent();
+    
+    // Set up interval for content rotation
+    setInterval(addRelatedContent, 4000);
+});
+
