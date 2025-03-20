@@ -56,7 +56,7 @@ user_memory.load()
 memory.load()
 history = [{"role": "user", "content": "I want to create a low risk portfolio"}]
 def ask_llm(history: list):
-    similar_prompts = memory.retrieve_interactions(history[-1]["content"])
+    similar_prompts = memory.retrieve_interactions(history[-1]["content"], require_metadata=True)
     similar_memories = memory.retrieve_interactions(history[-1]["content"])
     llm.enable_search(True)
     prompt = [PROMPT, "\nPrevious interactions with LLMs" + similar_prompts, "\nExtra context with the user:" + similar_memories]
