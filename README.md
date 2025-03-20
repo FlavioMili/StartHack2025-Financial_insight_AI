@@ -19,7 +19,8 @@ pip install -r requirements.txt
 
 After that, you can launch it using 
 ```bash 
-python main.py
+cd src
+python -m backend.main
 ```
 
 ### Speech Transcriber
@@ -48,7 +49,8 @@ pip install -r requirements.txt
 4. Launch the transcriber
 
 ```bash
-python transcribe.py 
+cd src
+python -m backend.speech.transcribe 
 ```
 
 
