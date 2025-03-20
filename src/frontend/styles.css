@@ -386,3 +386,116 @@ nav ul li a:hover {
     font-size: 16px;
     resize: none; /* Impedisce il ridimensionamento */
 }
+
+/* 🌑 Dark Mode Styles - Report Page */
+.report-container {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* REPORT HEADER */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e1e1e;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.report-header h1 {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.report-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.report-nav ul li a {
+  text-decoration: none;
+  color: #aaaaaa;
+  transition: color 0.3s;
+}
+
+.report-nav ul li a:hover {
+  color: #ffffff;
+}
+
+/* REPORT CONTENT */
+.report-section {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.report-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* REPORT TABLE */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.report-table th, .report-table td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+
+.report-table th {
+  background-color: #323232;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #222;
+}
+
+/* REPORT BUTTON */
+.report-btn {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.report-btn:hover {
+  background: #0056b3;
+}
+
+/* RESPONSIVE DESIGN FOR REPORT PAGE */
+@media (max-width: 768px) {
+  .report-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .report-section {
+    padding: 15px;
+  }
+}
+
+.dashboard_report {
+  display: grid;
+  gap: 20px;
+  flex-grow: 1;
+  height: calc(100% - 20px); /* Riduce leggermente l'altezza per lasciare spazio */
+  margin-bottom: 20px; /* Assicura il margine inferiore */
+  width: 100%;
+}

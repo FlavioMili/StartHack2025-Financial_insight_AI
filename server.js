@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'src/frontend/main.html'));
 });
 
+app.get("/report", (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/frontend/report.html'));
+});
+
 app.listen(port, () => {
   console.log(`Server attivo su http://localhost:${port}`);
 });
