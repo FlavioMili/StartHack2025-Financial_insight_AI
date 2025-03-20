@@ -4,6 +4,7 @@ import os
 from .speech.order_speakers import classify_speaker
 import threading 
 from flask_cors import CORS
+from markdown_plain_text.extention import convert_to_plain_text
 
 app = Flask(__name__)
 CORS(app)
@@ -43,7 +44,7 @@ def query(id):
     if not response:
         return jsonify({"error": "No JSON data provided"}), 400
     LAST_RESPONSES[id] = response
-    return jsonify({"received": response}), 200
+    return jsonify({"received": convert_to_plain_text(response)}), 200
 
 @app.route('/get_user/<int:id>', methods=['GET'])
 def get_user(id):
@@ -67,7 +68,7 @@ def chat(id):
         threading.Thread(target=model.add_memory_interaction, args=(VOCAL_CHAT_MEM.get(id, []), prompt)).start()
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    return jsonify({"prompt": prompt, "response": response}), 200
+    return jsonify({"prompt": prompt, "response": convert_to_plain_text(response)}), 200
 
 @app.route('/add_interaction/<int:id>', methods=['POST'])
 def add_interaction(id):

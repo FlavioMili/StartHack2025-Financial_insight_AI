@@ -1,5 +1,7 @@
 import json
 import re
+from markdown import Markdown
+from io import StringIO
 
 def process_conversation(text):
     """

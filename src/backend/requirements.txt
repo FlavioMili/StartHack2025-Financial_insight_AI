@@ -7,3 +7,4 @@ wordllama
 git+https://github.com/FrancescoCaracciolo/Memoripy.git
 flask
 flask-cors
+git+https://github.com/kostyachum/python-markdown-plain-text.git#egg=plain-text-markdown-extention
