@@ -335,21 +335,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 category: "Technology"
             }
         },
-        {
-            analysis: {
-                title: "Regulatory Environment Shifting",
-                points: [
-                    "EU Digital Markets Act implementation finalized.",
-                    "Tech companies face September compliance deadline."
-                ]
-            },
-            news: {
-                title: "EU Finalizes Digital Markets Act Implementation",
-                content: "Major tech companies including Alphabet and Microsoft have until September to comply with the EU's strict new digital market regulations.",
-                date: "March 18, 2025",
-                category: "Regulation"
-            }
-        },
+        //{
+        //    analysis: {
+        //        title: "Regulatory Environment Shifting",
+        //        points: [
+        //            "EU Digital Markets Act implementation finalized.",
+        //            "Tech companies face September compliance deadline."
+        //        ]
+        //    },
+        //    news: {
+        //        title: "EU Finalizes Digital Markets Act Implementation",
+        //        content: "Major tech companies including Alphabet and Microsoft have until September to comply with the EU's strict new digital market regulations.",
+        //        date: "March 18, 2025",
+        //        category: "Regulation"
+        //    }
+        //},
         {
             analysis: {
                 title: "Interest Rate Outlook",
@@ -365,47 +365,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 category: "Economy"
             }
         },
+        //{
+        //    analysis: {
+        //        title: "Bond Market Reaction",
+        //        points: [
+        //            "Treasury yields falling on rate cut expectations.",
+        //            "10-year yield at lowest level since December 2024."
+        //        ]
+        //    },
+        //    news: {
+        //        title: "Bond Markets Rally on Fed Comments",
+        //        content: "Treasury bonds rallied following the Federal Reserve's latest signals, with the benchmark 10-year yield falling to 3.2%.",
+        //        date: "March 20, 2025",
+        //        category: "Markets"
+        //    }
+        //},
         {
             analysis: {
-                title: "Bond Market Reaction",
+                title: "Crisis in the American market",
                 points: [
-                    "Treasury yields falling on rate cut expectations.",
-                    "10-year yield at lowest level since December 2024."
+                    "NASDAQ lost 7% of its value in just a month."
                 ]
             },
             news: {
-                title: "Bond Markets Rally on Fed Comments",
-                content: "Treasury bonds rallied following the Federal Reserve's latest signals, with the benchmark 10-year yield falling to 3.2%.",
-                date: "March 20, 2025",
-                category: "Markets"
-            }
-        },
-        {
-            analysis: {
-                title: "SIX Group's Digital Asset Growth",
-                points: [
-                    "Record transaction volumes in Q1 2025.",
-                    "Institutional adoption accelerating in European markets."
-                ]
-            },
-            news: {
-                title: "SIX Group Reports 15% Growth in Digital Asset Services",
-                content: "SIX Group's digital asset platform saw record transaction volumes in Q1 2025, as institutional adoption continues to accelerate.",
-                date: "March 17, 2025",
-                category: "Markets"
-            }
-        },
-        {
-            analysis: {
-                title: "Strategic Partnerships Expansion",
-                points: [
-                    "SIX Group forms alliances with three major European banks.",
-                    "Digital asset custody and settlement network expanding."
-                ]
-            },
-            news: {
-                title: "SIX Group Expands Institutional Blockchain Services",
-                content: "SIX Group announced strategic partnerships with three major European banks today, expanding its digital asset network across the continent.",
+                title: "American politics is making the market crash",
+                content: "As of today, the american presidency made the future of markets more uncertain, with VIX increasing its value of 26.4%.",
                 date: "March 18, 2025",
                 category: "Finance"
             }
@@ -423,41 +407,80 @@ document.addEventListener("DOMContentLoaded", function() {
     function addAnalysisItem(analysisItem) {
         const responseBox = document.querySelector('.response-box');
         if (!responseBox) return;
-    
-        // Get or create keypoints container
-        let keypoints = responseBox.querySelector('.keypoints');
-        if (!keypoints) {
-            keypoints = document.createElement('div');
-            keypoints.className = 'keypoints';
-            responseBox.appendChild(keypoints);
+        
+        // Get or create analysis content div - EXACTLY like news
+        let analysisContent = responseBox.querySelector('.analysis-content');
+        if (!analysisContent) {
+            analysisContent = document.createElement('div');
+            analysisContent.className = 'analysis-content';
+            analysisContent.style.maxHeight = '280px';
+            analysisContent.style.overflowY = 'auto';
+            analysisContent.style.padding = '0 5px';
+            analysisContent.style.scrollbarWidth = 'thin';
+            analysisContent.style.scrollbarColor = '#888 #323232';
+            responseBox.appendChild(analysisContent);
         }
-    
-        // Create new keypoint element with fade-in animation
+        
+        // Create new analysis item with same styling as news
         const keypoint = document.createElement('div');
         keypoint.className = 'keypoint';
-        keypoint.style.opacity = '0';
-        keypoint.style.transition = 'opacity 0.7s ease-in-out';
         keypoint.style.marginBottom = '15px';
+        keypoint.style.borderBottom = '1px solid #444';
+        keypoint.style.paddingBottom = '10px';
         keypoint.style.backgroundColor = '#323232';
         keypoint.style.padding = '10px';
         keypoint.style.borderRadius = '8px';
-        keypoint.style.borderBottom = '1px solid #444';
-    
-        // Add title
+        keypoint.style.opacity = '0';
+        keypoint.style.transition = 'opacity 0.7s ease-in-out';
+        
+        // Create metadata container like in news
+        const metaContainer = document.createElement('div');
+        metaContainer.style.display = 'flex';
+        metaContainer.style.alignItems = 'center';
+        metaContainer.style.marginBottom = '6px';
+        
+        // Create category badge - use "Analysis" as category
+        const category = document.createElement('span');
+        category.className = 'analysis-category';
+        category.textContent = "Analysis";
+        category.style.backgroundColor = 'rgb(205, 72, 43)';
+        category.style.color = 'white';
+        category.style.padding = '3px 8px';
+        category.style.borderRadius = '4px';
+        category.style.fontSize = '12px';
+        category.style.marginRight = '10px';
+        category.style.fontWeight = 'bold';
+        
+        // Create date element - using current date
+        const date = document.createElement('span');
+        date.className = 'analysis-date';
+        const today = new Date();
+        date.textContent = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        date.style.color = '#aaa';
+        date.style.fontSize = '12px';
+        date.style.fontWeight = '500';
+        
+        // Add title with same styling as news items
         const title = document.createElement('h3');
+        title.className = 'analysis-title';
         title.textContent = analysisItem.title;
-        title.style.color = 'white';
         title.style.fontSize = '16px';
         title.style.margin = '8px 0';
+        title.style.color = 'white';
         title.style.fontWeight = 'bold';
-        keypoint.appendChild(title);
-    
-        // Create points list but keep bullet points invisible initially
+        
+        // Create content container for points
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'points-content';
+        
+        // Create points list with proper styling
         const pointsList = document.createElement('ul');
         pointsList.style.color = '#ccc';
         pointsList.style.fontSize = '14px';
         pointsList.style.lineHeight = '1.4';
-    
+        pointsList.style.margin = '8px 0 0 0';
+        pointsList.style.paddingLeft = '20px';
+        
         // Create list items with individual fade-in transitions
         const listItems = [];
         analysisItem.points.forEach(point => {
@@ -465,26 +488,34 @@ document.addEventListener("DOMContentLoaded", function() {
             listItem.textContent = point;
             listItem.style.opacity = '0';
             listItem.style.transition = 'opacity 0.5s ease-in-out';
+            listItem.style.marginBottom = '5px';
             pointsList.appendChild(listItem);
             listItems.push(listItem);
         });
-    
-        keypoint.appendChild(pointsList);
-    
-        // Add to the top of the container
-        if (keypoints.firstChild) {
-            keypoints.insertBefore(keypoint, keypoints.firstChild);
+        
+        contentContainer.appendChild(pointsList);
+        
+        // Assemble the analysis item like we do for news
+        metaContainer.appendChild(category);
+        metaContainer.appendChild(date);
+        
+        keypoint.appendChild(metaContainer);
+        keypoint.appendChild(title);
+        keypoint.appendChild(contentContainer);
+        
+        // Add to the top of the container - EXACTLY like news
+        if (analysisContent.firstChild) {
+            analysisContent.insertBefore(keypoint, analysisContent.firstChild);
         } else {
-            keypoints.appendChild(keypoint);
+            analysisContent.appendChild(keypoint);
         }
-    
-        // Track this item
+        
+        // Track this item directly
         displayedAnalysis.push(keypoint);
-    
+        
         // Remove oldest item if we exceed the limit
         if (displayedAnalysis.length > maxItemsToShow) {
             const oldestItem = displayedAnalysis.shift();
-            // Fade out before removing
             oldestItem.style.opacity = '0';
             setTimeout(() => {
                 if (oldestItem.parentNode) {
@@ -492,16 +523,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }, 500);
         }
-    
-        // Fade in the keypoint container first
+        
+        // No need for manual scroll - browser will handle it automatically
+        // when we add to the top of the container
+        
+        // Fade in the keypoint first
         setTimeout(() => {
             keypoint.style.opacity = '1';
-    
+            
             // Then fade in each bullet point with a staggered delay
             listItems.forEach((item, index) => {
                 setTimeout(() => {
                     item.style.opacity = '1';
-                }, 300 + (index * 200)); // Start after 300ms, then 200ms for each point
+                }, 300 + (index * 200));
             });
         }, 100);
     }
