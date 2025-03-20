@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function addAnalysisItem(analysisItem) {
         const responseBox = document.querySelector('.response-box');
         if (!responseBox) return;
-        
+    
         // Get or create keypoints container
         let keypoints = responseBox.querySelector('.keypoints');
         if (!keypoints) {
@@ -431,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function() {
             keypoints.className = 'keypoints';
             responseBox.appendChild(keypoints);
         }
-        
+    
         // Create new keypoint element with fade-in animation
         const keypoint = document.createElement('div');
         keypoint.className = 'keypoint';
@@ -442,8 +442,8 @@ document.addEventListener("DOMContentLoaded", function() {
         keypoint.style.padding = '10px';
         keypoint.style.borderRadius = '8px';
         keypoint.style.borderBottom = '1px solid #444';
-        
-        // Add title 
+    
+        // Add title
         const title = document.createElement('h3');
         title.textContent = analysisItem.title;
         title.style.color = 'white';
@@ -451,13 +451,13 @@ document.addEventListener("DOMContentLoaded", function() {
         title.style.margin = '8px 0';
         title.style.fontWeight = 'bold';
         keypoint.appendChild(title);
-        
+    
         // Create points list but keep bullet points invisible initially
         const pointsList = document.createElement('ul');
         pointsList.style.color = '#ccc';
         pointsList.style.fontSize = '14px';
         pointsList.style.lineHeight = '1.4';
-        
+    
         // Create list items with individual fade-in transitions
         const listItems = [];
         analysisItem.points.forEach(point => {
@@ -468,19 +468,15 @@ document.addEventListener("DOMContentLoaded", function() {
             pointsList.appendChild(listItem);
             listItems.push(listItem);
         });
-        
+    
         keypoint.appendChild(pointsList);
-        
-        // Add to the beginning of the container
-        if (keypoints.firstChild) {
-            keypoints.insertBefore(keypoint, keypoints.firstChild);
-        } else {
-            keypoints.appendChild(keypoint);
-        }
-        
+    
+        // Append the new item at the bottom instead of the top
+        keypoints.appendChild(keypoint);
+    
         // Track this item
         displayedAnalysis.push(keypoint);
-        
+    
         // Remove oldest item if we exceed the limit
         if (displayedAnalysis.length > maxItemsToShow) {
             const oldestItem = displayedAnalysis.shift();
@@ -492,11 +488,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }, 500);
         }
-        
+    
         // Fade in the keypoint container first
         setTimeout(() => {
             keypoint.style.opacity = '1';
-            
+    
             // Then fade in each bullet point with a staggered delay
             listItems.forEach((item, index) => {
                 setTimeout(() => {
@@ -505,6 +501,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, 100);
     }
+    
     
     // Function to add new news item at the top
     function addNewsItem(newsItem) {
@@ -617,21 +614,35 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Function to add a new pair of related content
-    function addRelatedContent() {
+    function addRelatedContent(n) {
+    for (let i = 0; i < n; i++) {
+        const currentItem = contentItems[i % contentItems.length];
+
+        // Add new items at the top of each section
+        addNewsItem(currentItem.news);
+
+        // Move to next item
+        }
+    }
+
+    function addAnalysisContent() {
         const currentItem = contentItems[currentItemIndex];
         
         // Add new items at the top of each section
         addAnalysisItem(currentItem.analysis);
-        addNewsItem(currentItem.news);
         
         // Move to next item
         currentItemIndex = (currentItemIndex + 1) % contentItems.length;
     }
     
     // Set initial content (first item)
-    addRelatedContent();
+    addAnalysisContent();
     
     // Set up interval for content rotation
-    setInterval(addRelatedContent, 4000);
+    setInterval(addAnalysisContent, 6000);
+
+    // Set initial content (first item)
+    addRelatedContent(10);
+
 });
 
