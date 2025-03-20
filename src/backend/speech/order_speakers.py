@@ -1,5 +1,6 @@
-from llm.llmhandler import LLMHandler
-
+from ..llm.llmhandler import LLMHandler
+import json 
+from ..utility.strings import extract_json 
 
 ORDER_PROMPT = """
 You are a helpful assistant tasked with identifying the speaker and content of each utterance in a conversation.
@@ -42,6 +43,16 @@ Your goal is to structure the output as a list of dictionaries, where each dicti
 
 The LLM should then analyze the conversation and return the output in the desired list of dictionaries format. Remember that the accuracy of the LLM's output will depend on the clarity and context within the provided transcription. You might need to adjust the prompt or review the output if the conversation is ambiguous.
 """
+def convert_history(history: list[dict]):
+    for message in history:
+        message["role"] = "user" if message["role"] == "client" else "assistant"
+    return history
 
-def classify_speaker(self, llm: LLMHandler, transcription_text: str):
-    return llm.get_response([{"role": "user", "content": transcription_text}], [ORDER_PROMPT], [])
+def convert_history_openai(history: list[dict]):
+    for message in history:
+        message["role"] = "user" if message["role"] == "client" else "assistant"
+    return history
+
+def classify_speaker(llm: LLMHandler, transcription_text: str, context: list = []):  
+    r = llm.get_response([{"role": "assistant", "content": json.dumps(convert_history(context))}, {"role": "user", "content": transcription_text}], [ORDER_PROMPT], [])
+    return json.loads(extract_json(r))

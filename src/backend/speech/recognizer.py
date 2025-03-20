@@ -1,8 +1,14 @@
 import pyaudio
 import wave
+import requests
 import time
 from .whisper_api import recognize_file
 
+def send_transcript(transcript: str, chat_id:int, server="http://127.0.0.1:5000"):
+    url = f"{server}/add_interaction/" + str(chat_id)
+    data = {"sentence": transcript}
+    response = requests.post(url, data=data)
+    return response
 def record_and_transcribe():
     # Audio recording parameters
     CHUNK = 1024
@@ -46,7 +52,7 @@ def record_and_transcribe():
 
             # Check if the segment ends with sentence punctuation
             if transcript.strip() and transcript.strip()[-1] in ".!?":
-                print("Sentence completed.")
+                send_transcript(transcript, 0)
 
     except KeyboardInterrupt:
         print("\nRecording stopped.")
