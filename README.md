@@ -39,7 +39,13 @@ cd src/backend/speech
 pip install -r requirements.txt
 ```
 
-3. Launch the transcriber
+3. Launch the llama.cpp server (If necessary, it can be hosted remotely)
+
+```bash
+./start_whisper_server.sh
+```
+
+4. Launch the transcriber
 
 ```bash
 python transcribe.py 
