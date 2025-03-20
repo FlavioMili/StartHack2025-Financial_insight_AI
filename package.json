@@ -1,0 +1,15 @@
+{
+  "name": "starthack2025-financial_insight_ai",
+  "version": "1.0.0",
+  "description": "-- Update this README with a schematic idea of what to do",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

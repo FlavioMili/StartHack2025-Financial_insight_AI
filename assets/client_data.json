@@ -1,114 +1,25 @@
 {
   "client": {
-    "fullName": "Isabelle Dubois",
-    "taxArea": "French",
-    "preferences": {
-      "riskTolerance": "Moderate",
-      "goals": ["Retirement (15 years)", "Children's University Funds"],
-      "interests": ["Sustainable Investments", "European market"],
-      "callCharacter": "Analytical and Proactive"
-    }
-  },
-  "portfolio": {
-    "summary": {
-      "totalValue": 850000000.00,
-      "ytdReturn": -7.2,
-      "assetAllocation": {
-        "stocks": 70,
-        "bonds": 20,
-        "alternatives": 10
-      }
-    },
-    "holdings": [
-      {
-        "symbol": "ASML.AS",
-        "name": "ASML Holding NV",
-        "shares": 150,
-        "marketValue": 105000.00,
-        "costBasis": 110000.00,
-        "performance": -4.55
+      "Name": "Hans Müller",
+      "TaxZone": "Switzerland",
+      "NetWorth": {
+        "Stock": 500000,
+        "Bonds": 200000,
+        "Real_Estate": 300000,
+        "Other": 100000
       },
-      {
-        "symbol": "NOVO-B.CO",
-        "name": "Novo Nordisk A/S",
-        "shares": 200,
-        "marketValue": 120000.00,
-        "costBasis": 128000.00,
-        "performance": -6.25
+      "Taxes": {
+        "Income_Tax": 0.0,
+        "Capital_Gain_Tax": 0.26,
+        "Dividend_Tax": 0.26,
+        "Wealth_Tax": 0.0,
+        "Real_Estate_Tax": 0.01
       },
-      {
-        "symbol": "DBXN.DE",
-        "name": "Xtrackers II EUR Govt Bond 10Y",
-        "shares": 800,
-        "marketValue": 81600.00,
-        "costBasis": 80000.00,
-        "performance": 2.00
+      "Profile": {
+        "Data_Literacy": "Data-Driven",
+        "Emotivity": "Statesman",
+        "Time_Horizon": "Legacy-Oriented",
+        "Risk_Aversion": "Balanced Growth"
       }
-    ],
-    "performance": {
-      "ytdReturn": -7.2,
-      "historicalData": [
-        {"date": "2023-01-01", "value": 900000.00},
-        {"date": "2023-07-01", "value": 880000.00},
-        {"date": "2024-01-01", "value": 850000.00}
-      ],
-      "drawdown": -5.5
-    },
-    "transactions": [
-        {"date":"2024-02-20", "type":"Sell", "symbol":"NOVO-B.CO", "shares":50},
-        {"date":"2024-01-15", "type":"Dividend", "symbol":"ASML.AS", "amount":1200.00}
-    ]
-  },
-  "marketData": {
-    "indices": {
-      "CAC40": 7500.00,
-      "DAX": 16800.00,
-      "EU10Y": 3.05
-    },
-    "news": [
-      {
-        "title": "Semiconductor Sector Faces Supply Chain Disruptions",
-        "url": "https://example.com/semiconductor-news"
-      },
-      {
-        "title": "Pharmaceutical Sector Under Pressure from Pricing Concerns",
-        "url": "https://example.com/pharma-news"
-      },
-      {
-        "title":"Eurozone inflation stubbornly high, ECB policy under scrutiny",
-        "url":"https://example.com/eurozone-inflation"
-      }
-    ],
-    "economicIndicators": {
-      "inflation": 3.2,
-      "interestRate": 4.0,
-      "gdpGrowth": 1.5
-    }
-  },
-  "callContext": {
-    "performanceSummary": {
-      "portfolioReturn": "-7.2%",
-      "benchmarkReturn": "-3.5%",
-      "keyContributors": [
-        {"symbol": "ASML.AS", "decline": "-4.55%", "reason": "Supply chain issues, market volatility"},
-        {"symbol": "NOVO-B.CO", "decline": "-6.25%", "reason": "Pricing pressures, competition"}
-      ],
-      "attribution":{
-        "marketFactors": "Partially",
-        "sectorSpecific":"Yes",
-        "individualStock":"Yes"
-      }
-    },
-      "analystConsensus": {
-        "ASML.AS": "Mixed, with concerns about short-term volatility",
-        "NOVO-B.CO": "Increasingly cautious due to pricing and competition"
-      }
-    },
-    "recommendations": {
-      "rebalance": "Consider rebalancing to reduce exposure to ASML.AS and NOVO-B.CO, and potentially increase bond or defensive sector allocation.",
-      "longTermView": "Reiterate the 15-year retirement goal and the importance of staying focused on long-term objectives despite short-term fluctuations.",
-      "mitigationStrategies": ["Explore diversifying into sustainable energy or infrastructure sectors.", "Review NOVO-B.CO position for long-term growth potential."],
-      "managerActions":"Portfolio was rebalanced in February, reducing NOVO-B.CO exposure. Further review of the semiconductor sector is required."
-    }
   }
 }
