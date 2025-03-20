@@ -57,5 +57,11 @@ class ResponsePipeline():
         self.llm.enable_search(True)
         r = self.llm.get_response(history, [PROMPT_CHAT, self.user_info], [tool.tool_list])
         self.llm.enable_search(False)
+        self.add_memory_interaction(history)
         return r
 
+    def add_memory_interaction(self, history: list, prompt: str = "") -> None:
+        if (len(history) < 2):
+            return
+        self.memory.add_interaction(history[-1]["content"], history[-2]["content"], {"llm_query": prompt})
+        
