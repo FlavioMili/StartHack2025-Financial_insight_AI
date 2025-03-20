@@ -5,3 +5,5 @@ requests
 openai
 wordllama
 git+https://github.com/FrancescoCaracciolo/Memoripy.git
+flask
+flask-cors
