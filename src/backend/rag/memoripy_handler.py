@@ -8,6 +8,7 @@ from memoripy.model import ChatModel
 import os
 import numpy as np
 from ..utility.strings import extract_json
+from ..utility.strings import process_conversation
 
 class MemoripyHandler(RAGHandler):
     key = "memoripy"
@@ -59,7 +60,7 @@ class MemoripyHandler(RAGHandler):
                 return response
 
             def extract_concepts(self, text: str) -> list[str]:
-                response = self.llm.get_response(text, [],[self.prompt])
+                response = self.llm.get_response([{"role": "user", "content": text}], [],[self.prompt])
                 j = extract_json(response)
                 if type(j) is not list:
                     return []
@@ -71,7 +72,8 @@ class MemoripyHandler(RAGHandler):
         if self.memory_manager is not None:
             combined_text = " ".join([prompt, response])
             concepts = self.memory_manager.extract_concepts(combined_text)
-            new_embedding = self.embedding.get_embedding([combined_text])[0]
+            print(combined_text)
+            new_embedding = self.embedding.get_embedding(combined_text)
             self.memory_manager.add_interaction(prompt, response, new_embedding, concepts)
 
     def retrieve_interactions(self, message):
@@ -79,8 +81,8 @@ class MemoripyHandler(RAGHandler):
             relevant_interactions = self.memory_manager.retrieve_relevant_interactions(message, exclude_last_n=self.memory_size, return_minimum=3)
             r = []
             for i in relevant_interactions:
-               r.append({"prompt":i["prompt"], "output":i["output"]})
-            return "\n".join(r)
+               r.append(i["prompt"] + "\n" + i["output"])
+            return process_conversation("\n".join(r))
         return ""
             
 
