@@ -7,7 +7,7 @@ ASSETS_FOLDER = "assets"
 
 @app.route('/getClientData/<int:id>', methods=['GET'])
 def getClientData(id):
-    file_path = os.path.join('../assets/', f"{id}.json")
+    file_path = os.path.join('../assets/', f"client_{id}.json")
     if not os.path.exists(file_path):
         return jsonify({"error": "File not found"}), 404
     return send_file(file_path, mimetype='application/json')
