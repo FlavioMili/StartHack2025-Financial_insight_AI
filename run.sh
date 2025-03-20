@@ -10,7 +10,7 @@ python -m backend.main &
 
 # Start the Node.js server
 echo "Starting Node.js server..."
-cd ../../
+cd ../
 node server.js &
 
 # Start the speech transcription service

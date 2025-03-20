@@ -110,3 +110,114 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
+// Chat functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const chatInput = document.querySelector('.chat-input');
+    const chatBox = document.querySelector('.chat-box');
+    
+    if (chatInput && chatBox) {
+        // Default client ID
+        const clientId = 0;
+        
+        // Function to add a message to the chat display
+        function addMessageToChat(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'user-message' : 'bot-message';
+            messageDiv.textContent = message;
+            messageDiv.style.padding = '8px 12px';
+            messageDiv.style.margin = '4px 0';
+            messageDiv.style.borderRadius = '12px';
+            messageDiv.style.maxWidth = '80%';
+            messageDiv.style.wordWrap = 'break-word';
+            
+            if (isUser) {
+                messageDiv.style.alignSelf = 'flex-end';
+                messageDiv.style.backgroundColor = '#555555'; // Dark gray for user messages
+                messageDiv.style.color = 'white';
+            } else {
+                messageDiv.style.alignSelf = 'flex-start';
+                messageDiv.style.backgroundColor = '#e0e0e0'; // Light gray for bot messages
+                messageDiv.style.color = '#333';
+            }
+            
+            // Make sure chat box is set up for flex layout
+            chatBox.style.display = 'flex';
+            chatBox.style.flexDirection = 'column';
+            chatBox.style.overflowY = 'auto';
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        
+        // Function to send chat message to backend
+        async function sendChatMessage(message) {
+            try {
+                // Show user message immediately
+                addMessageToChat(message, true);
+                
+                // Add loading indicator
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'loading-message';
+                loadingDiv.textContent = 'Loading...';
+                loadingDiv.style.alignSelf = 'flex-start';
+                loadingDiv.style.fontStyle = 'italic';
+                loadingDiv.style.color = '#888'; // Gray for loading indicator
+                loadingDiv.style.margin = '4px 0';
+                chatBox.appendChild(loadingDiv);
+                
+                // Create form data for POST request
+                const formData = new FormData();
+                formData.append('prompt', message);
+                
+                // Send request to backend
+                const response = await fetch(`http://127.0.0.1:5000/chat/${clientId}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                // Remove loading indicator
+                chatBox.removeChild(loadingDiv);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Display response from assistant
+                addMessageToChat(data.response);
+                
+            } catch (error) {
+                console.error("Error sending chat message:", error);
+                
+                // Remove loading indicator if it exists
+                const loadingElement = document.querySelector('.loading-message');
+                if (loadingElement) {
+                    chatBox.removeChild(loadingElement);
+                }
+                
+                addMessageToChat("Sorry, there was an error processing your request.");
+            }
+        }
+        
+        // Handle sending messages when pressing Enter (but allow Shift+Enter for new lines)
+        chatInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                const message = chatInput.value.trim();
+                if (message) {
+                    sendChatMessage(message);
+                    chatInput.value = ''; // Clear input after sending
+                }
+            }
+        });
+
+        // Add a welcome message
+        addMessageToChat("Hello! How can I help you with your financial questions today?");
+        
+        console.log("Chat functionality initialized");
+    } else {
+        console.error("Chat elements not found in the DOM");
+    }
+});
+
