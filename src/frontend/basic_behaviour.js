@@ -47,7 +47,12 @@ document.addEventListener("DOMContentLoaded", function () { //PIE CHART
 
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const response = await fetch("/assets/client_0.json");
+        const response = await fetch("http://127.0.0.1:5000/get_user/0");
+        
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Stato: ${response.status}`);
+        }
+        
         const data = await response.json();
         const client = data.client;
 
