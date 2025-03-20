@@ -12,6 +12,7 @@ ASSETS_FOLDER = "../assets"
 
 VOCAL_CHAT_MEM = {0: [{"role": "user", "content": "Why my tesla shares dropped?"}]}
 
+LAST_RESPONSES = {}
 TEXT_CHAT_MEM = {}
 TEMPORARY_CHAT_MEM = {}
 PIPELINES = {}
@@ -23,6 +24,11 @@ def getClientData(id):
     if not os.path.exists(file_path):
         return jsonify({"error": "File not found"}), 404
     return send_file(file_path, mimetype='application/json')
+
+@app.route('/live_response/<int:id>', methods=['GET'])
+def get_response(id):
+    response = LAST_RESPONSES.get(id, "")
+    return jsonify({"received": response}), 200
 
 @app.route('/query/<int:id>', methods=['GET'])
 def query(id):
@@ -36,6 +42,7 @@ def query(id):
     response = model.get_answer(VOCAL_CHAT_MEM[id][-CONTEXT_SIZE:])
     if not response:
         return jsonify({"error": "No JSON data provided"}), 400
+    LAST_RESPONSES[id] = response
     return jsonify({"received": response}), 200
 
 @app.route('/get_user/<int:id>', methods=['GET'])
