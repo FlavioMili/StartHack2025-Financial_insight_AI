@@ -3,8 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Report | SIX Financial Insights</title>
+    <title>Client Behavior Report | SIX Financial Insights</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for the report page */
+        .container {
+            width: 97.5%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .report-header h1 {
+            margin: 0;
+        }
+
+        .report-nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .report-nav ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .report-nav ul li a:hover,
+        .report-nav ul li a.active {
+            color: rgb(205, 72, 43);
+        }
+
+        .dashboard_report {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width:96%;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .report-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .timeframe-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timeframe-btn {
+            background-color: #323232;
+            color: #ccc;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .timeframe-btn:hover {
+            background-color: #444;
+        }
+
+        .timeframe-btn.active {
+            background-color: rgb(205, 72, 43);
+            color: white;
+            border-color: rgb(205, 72, 43);
+        }
+
+        .ai-insights {
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: #323232;
+            border-radius: 8px;
+        }
+
+        .ai-insights h3 {
+            color: white;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .ai-insights p,
+        .ai-insights ul {
+            color: #ccc;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+
+        .behavioral-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            background-color: #222;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            color: #aaa;
+            margin-bottom: 3px;
+        }
+
+        .metric-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .recommended-actions {
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: #323232;
+            border-radius: 8px;
+        }
+
+        .recommended-actions h3 {
+            color: white;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .recommended-actions p {
+            color: #ccc;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .report-table th,
+        .report-table td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .report-table th {
+            background-color: #323232;
+        }
+
+        .report-table tbody tr:nth-child(even) {
+            background-color: #222;
+        }
+
+        .additional-notes {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #444;
+            background-color: #323232;
+            color: #ccc;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -12,7 +199,7 @@
             <h1><img src="assets/SIX_Group_logo.png" alt="SIX Logo" class="logo"></h1>
             <nav class="report-nav">
                 <ul>
-                    <li><a href="/report" class="active">Report</a></li>
+                    <li><a href="/report" class="active">Client Behavior</a></li>
                     <li><a href="#">Analytics</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
@@ -20,245 +207,157 @@
         </header>
 
         <div class="dashboard_report">
-            <!-- Performance Graph Section -->
+            <!-- Client Behavior Analysis Section -->
             <div class="card report-section">
                 <div class="report-header-row">
-                    <h2>Portfolio Performance</h2>
+                    <h2>Client Behavior Analysis</h2>
                     <!-- Timeframe selector -->
                     <div class="timeframe-selector">
                         <button class="timeframe-btn" data-period="1m">1M</button>
                         <button class="timeframe-btn active" data-period="3m">3M</button>
                         <button class="timeframe-btn" data-period="6m">6M</button>
                         <button class="timeframe-btn" data-period="1y">1Y</button>
-                        <button class="timeframe-btn" data-period="all">All</button>
                     </div>
                 </div>
 
-                <!-- Chart container -->
-                <div class="chart-container">
-                    <canvas id="performanceChart"></canvas>
+                <!-- AI-Generated Insights -->
+                <div class="ai-insights">
+                    <h3>AI-Driven Behavioral Insights</h3>
+                    <p id="ai-summary">Over the last 3 months, the client has shown a keen interest in technology stocks, particularly in AI and renewable energy. Their risk appetite is moderate, with a tendency to rebalance the portfolio monthly.</p>
+                    <ul id="key-observations">
+                        <li>Increased trading volume in the tech sector</li>
+                        <li>Consistent portfolio diversification across multiple sectors</li>
+                        <li>Active engagement with sustainable investment options</li>
+                    </ul>
                 </div>
 
-                <!-- 3-Month Analysis container (default view) -->
-                <div class="analysis-container" id="analysis-3m">
-                    <div class="performance-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Total Return</span>
-                            <span class="metric-value positive">+8.2%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">vs. Benchmark</span>
-                            <span class="metric-value positive">+2.1%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Volatility</span>
-                            <span class="metric-value">12.4%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Sharpe Ratio</span>
-                            <span class="metric-value">1.8</span>
-                        </div>
+                <!-- Behavioral Metrics -->
+                <div class="behavioral-metrics">
+                    <h3>Key Behavioral Metrics</h3>
+                    <div class="metric">
+                        <span class="metric-label">Trading Frequency</span>
+                        <span class="metric-value" id="trading-frequency">Medium</span>
                     </div>
-
-                    <div class="analysis-text">
-                        <h3>3-Month Performance Analysis</h3>
-                        <p>The portfolio has outperformed its benchmark by 2.1% over the last quarter, with particularly strong performance in the technology and healthcare sectors. This growth was primarily driven by strategic positioning ahead of the Federal Reserve's rate direction signals and strong earnings reports from key holdings.</p>
-                        <p>Risk metrics remain stable with volatility at 12.4%, which is within our target range. The current Sharpe ratio of 1.8 indicates excellent risk-adjusted returns compared to the market average of 1.4 for similar portfolios.</p>
+                    <div class="metric">
+                        <span class="metric-label">Risk Tolerance</span>
+                        <span class="metric-value" id="risk-tolerance">Moderate</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Investment Focus</span>
+                        <span class="metric-value" id="investment-focus">Tech, Renewables, Diversified</span>
                     </div>
                 </div>
 
-                <!-- 1-Month View -->
-                <div class="analysis-container" id="analysis-1m" style="display: none;">
-                    <div class="performance-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Total Return</span>
-                            <span class="metric-value positive">+2.8%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">vs. Benchmark</span>
-                            <span class="metric-value positive">+0.7%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Volatility</span>
-                            <span class="metric-value">9.7%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Sharpe Ratio</span>
-                            <span class="metric-value">1.5</span>
-                        </div>
-                    </div>
-
-                    <div class="analysis-text">
-                        <h3>1-Month Performance Analysis</h3>
-                        <p>The portfolio has shown resilience in this month's volatile market conditions, gaining 2.8% against the benchmark's 2.1%. Recent rebalancing toward defensive positions has provided protection during the market turbulence caused by tech sector volatility.</p>
-                        <p>Notably, SIX Group holdings have contributed positively following their reported growth in digital asset services. We recommend maintaining the current asset allocation while monitoring upcoming Federal Reserve announcements for potential opportunities.</p>
-                    </div>
-                </div>
-
-                <!-- 1-Year View (New) -->
-                <div class="analysis-container" id="analysis-1y" style="display: none;">
-                    <div class="performance-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Total Return</span>
-                            <span class="metric-value positive">+27.5%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">vs. Benchmark</span>
-                            <span class="metric-value positive">+8.3%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Volatility</span>
-                            <span class="metric-value">14.2%</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Sharpe Ratio</span>
-                            <span class="metric-value">2.1</span>
-                        </div>
-                    </div>
-
-                    <div class="analysis-text">
-                        <h3>1-Year Performance Analysis</h3>
-                        <p>The portfolio has delivered exceptional results over the past year, with a 27.5% total return that significantly outperforms the benchmark index. Our strategic overweight in technology and financial infrastructure sectors has been the primary driver of this outperformance.</p>
-                        <p>Key contributors include our positions in SIX Group (+42% YoY) and several AI technology leaders, which benefited from increased institutional adoption of digital assets and expansion of AI applications in financial services. The higher volatility (14.2%) was well-compensated with superior returns, leading to an excellent Sharpe ratio of 2.1.</p>
-                        <p>For the coming year, we recommend maintaining the core positions while gradually increasing exposure to defensive sectors as a hedge against potential market corrections after this strong bull run.</p>
-                    </div>
+                <!-- Recommended Actions -->
+                <div class="recommended-actions">
+                    <h3>Recommended Actions</h3>
+                    <p id="recommended-actions-text">Capitalize on the client's interest in AI and renewable energy by presenting new investment opportunities in these sectors. Continue to provide diversified options to balance the portfolio's risk.</p>
                 </div>
             </div>
+
+            <!-- Client Interaction Log -->
+            <div class="card report-section">
+                <h2>Client Interaction Log</h2>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Interaction Type</th>
+                            <th>Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody id="interaction-log">
+                        <tr>
+                            <td>2025-03-18</td>
+                            <td>Email</td>
+                            <td>Provided update on AI stock performance</td>
+                        </tr>
+                        <tr>
+                            <td>2025-03-10</td>
+                            <td>Phone Call</td>
+                            <td>Discussed portfolio rebalancing options</td>
+                        </tr>
+                        <tr>
+                            <td>2025-03-02</td>
+                            <td>Meeting</td>
+                            <td>Reviewed investment strategy and goals</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Additional Notes Section -->
+            <div class="card report-section">
+                <h2>Additional Notes</h2>
+                <textarea id="additional-notes" class="additional-notes" placeholder="Add any additional notes or observations here..."></textarea>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="basic_behaviour.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize the performance chart
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            
-            // Sample data for different timeframes
-            const chartData = {
-                // 3-month data (default)
-                '3m': {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [
-                        {
-                            label: 'Portfolio',
-                            backgroundColor: 'rgba(205, 72, 43, 0.1)',
-                            borderColor: 'rgb(205, 72, 43)',
-                            data: [980000, 985000, 1000000, 1020000, 1080000, 1090000, 1100000, 1150000, 1180000, 1200000, 1230000, 1250000],
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Benchmark',
-                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                            borderColor: 'rgb(54, 162, 235)',
-                            data: [980000, 975000, 990000, 1000000, 1040000, 1050000, 1060000, 1095000, 1110000, 1125000, 1145000, 1155000],
-                            fill: true,
-                            tension: 0.4
-                        }
-                    ]
-                },
-                // 1-month data
-                '1m': {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    datasets: [
-                        {
-                            label: 'Portfolio',
-                            backgroundColor: 'rgba(205, 72, 43, 0.1)',
-                            borderColor: 'rgb(205, 72, 43)',
-                            data: [1210000, 1225000, 1200000, 1250000],
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Benchmark',
-                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                            borderColor: 'rgb(54, 162, 235)',
-                            data: [1210000, 1215000, 1195000, 1220000],
-                            fill: true,
-                            tension: 0.4
-                        }
-                    ]
-                },
-                // 1-year data
-                '1y': {
-                    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', 'Q1 2025'],
-                    datasets: [
-                        {
-                            label: 'Portfolio',
-                            backgroundColor: 'rgba(205, 72, 43, 0.1)',
-                            borderColor: 'rgb(205, 72, 43)',
-                            data: [950000, 1050000, 1150000, 1200000, 1250000],
-                            fill: true,
-                            tension: 0.4
-                        },
-                        {
-                            label: 'Benchmark',
-                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                            borderColor: 'rgb(54, 162, 235)',
-                            data: [950000, 1000000, 1080000, 1120000, 1155000],
-                            fill: true,
-                            tension: 0.4
-                        }
-                    ]
-                }
-            };
-            
-            // Initialize with 3-month data
-            const chart = new Chart(ctx, {
-                type: 'line',
-                data: chartData['3m'],
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return '€' + (value/1000000).toFixed(1) + 'M';
-                                },
-                                color: '#aaa'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#aaa'
-                            }
-                        }
+            // Function to fetch AI-generated insights
+            async function fetchAIInsights(period) {
+                // Placeholder data
+                const data = {
+                    aiSummary: `Over the last ${period}, the client has shown a keen interest in technology stocks, particularly in AI and renewable energy. Their risk appetite is moderate, with a tendency to rebalance the portfolio monthly.`,
+                    keyObservations: [
+                        "Increased trading volume in the tech sector",
+                        "Consistent portfolio diversification across multiple sectors",
+                        "Active engagement with sustainable investment options"
+                    ],
+                    behavioralMetrics: {
+                        tradingFrequency: "Medium",
+                        riskTolerance: "Moderate",
+                        investmentFocus: "Tech, Renewables, Diversified"
                     },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null) {
-                                        label += new Intl.NumberFormat('eu-EU', { style: 'currency', currency: 'EUR' }).format(context.parsed.y);
-                                    }
-                                    return label;
-                                }
-                            }
-                        },
-                        legend: {
-                            labels: {
-                                color: '#ddd'
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 800,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            });
-            
+                    recommendedActions: "Capitalize on the client's interest in AI and renewable energy by presenting new investment opportunities in these sectors. Continue to provide diversified options to balance the portfolio's risk.",
+                    interactionLog: [
+                        { date: "2025-03-18", type: "Email", summary: "Provided update on AI stock performance" },
+                        { date: "2025-03-10", type: "Phone Call", summary: "Discussed portfolio rebalancing options" },
+                        { date: "2025-03-02", type: "Meeting", summary: "Reviewed investment strategy and goals" }
+                    ]
+                };
+
+                // Update AI summary
+                document.getElementById('ai-summary').textContent = data.aiSummary;
+
+                // Update key observations
+                const keyObservationsList = document.getElementById('key-observations');
+                keyObservationsList.innerHTML = '';
+                data.keyObservations.forEach(observation => {
+                    const li = document.createElement('li');
+                    li.textContent = observation;
+                    keyObservationsList.appendChild(li);
+                });
+
+                // Update behavioral metrics
+                document.getElementById('trading-frequency').textContent = data.behavioralMetrics.tradingFrequency;
+                document.getElementById('risk-tolerance').textContent = data.behavioralMetrics.riskTolerance;
+                document.getElementById('investment-focus').textContent = data.behavioralMetrics.investmentFocus;
+
+                // Update recommended actions
+                document.getElementById('recommended-actions-text').textContent = data.recommendedActions;
+
+                // Update interaction log
+                const interactionLogTable = document.getElementById('interaction-log');
+                interactionLogTable.innerHTML = '';
+                data.interactionLog.forEach(interaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${interaction.date}</td>
+                        <td>${interaction.type}</td>
+                        <td>${interaction.summary}</td>
+                    `;
+                    interactionLogTable.appendChild(row);
+                });
+            }
+
+            // Initial load with default period (3M)
+            fetchAIInsights('3m');
+
             // Handle timeframe button clicks
             const timeframeButtons = document.querySelectorAll('.timeframe-btn');
             timeframeButtons.forEach(button => {
@@ -267,458 +366,15 @@
                     timeframeButtons.forEach(btn => btn.classList.remove('active'));
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     // Get the selected period
                     const period = this.getAttribute('data-period');
-                    
-                    // Hide all analysis containers
-                    document.querySelectorAll('.analysis-container').forEach(container => {
-                        container.style.display = 'none';
-                    });
-                    
-                    // Show the appropriate analysis based on timeframe
-                    if (period === '1m') {
-                        document.getElementById('analysis-1m').style.display = 'block';
-                        // Update chart data for 1M view
-                        chart.data = chartData['1m'];
-                        chart.update();
-                    } else if (period === '1y') {
-                        document.getElementById('analysis-1y').style.display = 'block';
-                        // Update chart data for 1Y view
-                        chart.data = chartData['1y'];
-                        chart.update();
-                    } else {
-                        // Default to 3M view for other periods (or could create more specific views)
-                        document.getElementById('analysis-3m').style.display = 'block';
-                        chart.data = chartData['3m'];
-                        chart.update();
-                    }
+
+                    // Fetch AI insights for the selected period
+                    fetchAIInsights(period);
                 });
             });
-
-            // Add a subtle animation highlighting key metrics on page load
-            setTimeout(() => {
-                const metrics = document.querySelectorAll('.metric-value');
-                metrics.forEach((metric, index) => {
-                    setTimeout(() => {
-                        metric.style.transition = 'transform 0.3s ease-out, color 0.3s ease-out';
-                        metric.style.transform = 'scale(1.1)';
-                        setTimeout(() => {
-                            metric.style.transform = 'scale(1)';
-                        }, 300);
-                    }, index * 100);
-                });
-            }, 500);
         });
     </script>
-    
-    <style>
-        /* Additional styles for the report page */
-        .report-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .timeframe-selector {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .timeframe-btn {
-            background-color: #323232;
-            color: #ccc;
-            border: 1px solid #444;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .timeframe-btn:hover {
-            background-color: #444;
-        }
-        
-        .timeframe-btn.active {
-            background-color: rgb(205, 72, 43);
-            color: white;
-            border-color: rgb(205, 72, 43);
-        }
-/*         
-        .chart-container {
-            height: 350px;
-            width: 100%;
-            margin-bottom: 30px; /* Increased margin to prevent cut-off */
-            position: relative;
-            overflow: visible; /* Allow labels to show outside container */
-            padding-bottom: 20px; /* Extra padding for bottom labels */
-        } */
-        
-        .performance-metrics {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background-color: #222;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .metric-label {
-            font-size: 12px;
-            color: #aaa;
-            margin-bottom: 5px;
-        }
-        
-        .metric-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .metric-value.positive {
-            color: #4caf50;
-        }
-        
-        .metric-value.negative {
-            color: #f44336;
-        }
-        
-        .analysis-text {
-            background-color: #323232;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .analysis-text h3 {
-            margin-top: 0;
-            color: white;
-            margin-bottom: 10px;
-        }
-        
-        .analysis-text p {
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-        
-        .action-btn {
-            background-color: transparent;
-            border: 1px solid rgb(205, 72, 43);
-            color: rgb(205, 72, 43);
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .action-btn:hover {
-            background-color: rgba(205, 72, 43, 0.1);
-        }
-        
-        .report-nav ul li a.active {
-            color: rgb(205, 72, 43);
-            font-weight: bold;
-        }
-
-        /* Add a subtle loading/transition effect */
-        @keyframes chartFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        #performanceChart {
-            animation: chartFadeIn 0.8s ease-out;
-            max-width: 100%; /* Prevent oversizing */
-            max-height: 100%;
-        }
-
-        /* Ensure consistent spacing in analysis containers */
-        .analysis-container {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-        }
-        
-        /* Maintain consistent spacing throughout the page */
-        /* .report-section {
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-        } */
-        
-        /* Fix table bottom spacing */
-        .report-table {
-            margin-bottom: 15px;
-        }
-        
-        /* Ensure full container has adequate spacing */
-        .dashboard_report {
-            border-radius: 8px;
-            padding-bottom: 40px;
-        }
-
-        /* Chart styling consistent with the rest of the site */
-        /* .chart-container {
-            height: 350px;
-            margin-bottom: 20px;
-            position: relative;
-            background-color: #323232;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-        } */
-        
-        #performanceChart {
-            animation: chartFadeIn 0.8s ease-out;
-            max-width: 100%;
-            max-height: 100%;
-        }
-        
-        /* Match the performance-metrics with other container styles */
-        .performance-metrics {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            background-color: #323232;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .metric-label {
-            font-size: 12px;
-            color: #aaa;
-            margin-bottom: 5px;
-        }
-        
-        .metric-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .metric-value.positive {
-            color: #4caf50;
-        }
-        
-        .analysis-text {
-            background-color: #323232;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .analysis-text h3 {
-            margin-top: 0;
-            color: white;
-            margin-bottom: 10px;
-        }
-        
-        .analysis-text p {
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-        
-        /* Button styles matching the global styles */
-        .timeframe-btn {
-            background-color: transparent;
-            border: 2px solid rgb(205, 72, 43);
-            color: white;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            height: 40px;
-            margin-top: 5px;
-        }
-        
-        .timeframe-btn:hover {
-            background-color: rgba(205, 72, 43, 0.1);
-        }
-        
-        .timeframe-btn.active {
-            background-color: rgb(205, 72, 43);
-            color: white;
-        }
-        
-        .action-btn {
-            background-color: transparent;
-            border: 2px solid rgb(205, 72, 43);
-            color: rgb(205, 72, 43);
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .action-btn:hover {
-            background-color: rgba(205, 72, 43, 0.1);
-        }
-        
-        /* Fix animation */
-        @keyframes chartFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Table styling to match global styles */
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .report-table th, .report-table td {
-            border: 1px solid #444;
-            padding: 10px;
-            text-align: left;
-        }
-        
-        .report-table th {
-            background-color: #323232;
-        }
-        
-        .report-table tbody tr:nth-child(even) {
-            background-color: #222;
-        }
-        
-        /* Ensure consistent spacing */
-        /* .report-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #1e1e1e;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        } */
-        
-        .report-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        /* Fix dashboard spacing */
-        /* .dashboard_report {
-            padding-bottom: 40px;
-        } */
-
-        /* Overall card styling */
-        .card.report-section {
-            background: #1e1e1e;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px; /* Reduced margin */
-            padding: 15px; /* Reduced padding */
-            overflow: hidden;
-            width: 97.4%;
-        }
-        
-        /* Smaller chart container */
-        .chart-container {
-            height: 250px; /* Reduced height */
-            margin-bottom: 15px; /* Reduced margin */
-            position: relative;
-            background-color: #323232;
-            border-radius: 8px;
-            padding: 10px; /* Reduced padding */
-            margin-top: 5px; /* Reduced margin */
-        }
-        
-        /* Smaller chart */
-        #performanceChart {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        
-        /* Performance metrics styling */
-        .performance-metrics {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px; /* Reduced margin */
-            background-color: #323232;
-            padding: 10px; /* Reduced padding */
-            border-radius: 8px;
-        }
-        
-        .metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .metric-label {
-            font-size: 10px; /* Smaller font */
-            color: #aaa;
-            margin-bottom: 3px; /* Reduced margin */
-        }
-        
-        .metric-value {
-            font-size: 14px; /* Smaller font */
-            font-weight: bold;
-            color: white;
-        }
-        
-        /* Analysis text styling */
-        .analysis-text {
-            background-color: #323232;
-            padding: 10px; /* Reduced padding */
-            border-radius: 8px;
-            font-size: 12px; /* Smaller font */
-        }
-        
-        .analysis-text h3 {
-            margin-top: 0;
-            color: white;
-            margin-bottom: 8px; /* Reduced margin */
-            font-size: 14px; /* Smaller font */
-        }
-        
-        .analysis-text p {
-            color: #ccc;
-            line-height: 1.4;
-            margin-bottom: 8px; /* Reduced margin */
-        }
-        
-        /* Timeframe selector styling */
-        .timeframe-selector {
-            background-color: #323232;
-            border-radius: 8px;
-            padding: 8px; /* Reduced padding */
-            display: flex;
-            gap: 6px; /* Reduced gap */
-        }
-        
-        .timeframe-btn {
-            border-width: 1.5px; /* Thinner border */
-            font-size: 12px; /* Smaller font */
-            padding: 5px 8px; /* Reduced padding */
-            height: 30px; /* Reduced height */
-        }
-        
-        /* Table styling */
-        .report-table {
-            font-size: 12px; /* Smaller font */
-            margin-top: 10px; /* Reduced margin */
-            margin-bottom: 10px; /* Reduced margin */
-        }
-        
-        .report-table th, .report-table td {
-            padding: 8px; /* Reduced padding */
-        }
-    </style>
 </body>
 </html>
